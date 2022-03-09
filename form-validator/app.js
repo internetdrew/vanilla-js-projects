@@ -25,4 +25,16 @@ form.addEventListener('submit', function (e) {
   username.value === ''
     ? showError(username, 'Username is required')
     : showSuccess(username);
+
+  email.value === ''
+    ? showError(email, 'Email is required')
+    : showSuccess(email);
+
+  password.value === ''
+    ? showError(password, 'Password is required')
+    : showSuccess(password);
+
+  password2.value === ''
+    ? showError(password2, 'Password 2 is required')
+    : showSuccess(password2);
 });

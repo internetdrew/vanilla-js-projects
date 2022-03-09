@@ -18,6 +18,9 @@ function showSuccess(input) {
   formControl.className = 'form-control success';
 }
 
+// Check email validity
+function isValidEmail(email) {}
+
 // Event listeners
 form.addEventListener('submit', function (e) {
   e.preventDefault();

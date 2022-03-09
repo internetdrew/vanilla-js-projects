@@ -30,11 +30,9 @@ function checkEmailValidity(inputField) {
 
 function checkRequired(inputFieldArr) {
   inputFieldArr.forEach((inputField) => {
-    if (inputField.value.trim() === '') {
-      showErrorStatus(inputField, `${getFieldName(inputField)} is required`);
-    } else {
-      showSuccessStatus(inputField);
-    }
+    inputField.value.trim() === ''
+      ? showErrorStatus(inputField, `${getFieldName(inputField)} is required`)
+      : showSuccessStatus(inputField);
   });
 }
 
@@ -54,13 +52,10 @@ function checkInputLength(inputField, min, max) {
 
 function checkPasswordsMatch(inputField1, inputField2) {
   if (inputField1.value !== '' && inputField2.value !== '') {
-    if (inputField1.value !== inputField2.value) {
-      showErrorStatus(inputField1, 'Passwords do not match');
-      showErrorStatus(inputField2, 'Passwords do not match');
-    } else {
-      showSuccessStatus(inputField1);
-      showSuccessStatus(inputField2);
-    }
+    inputField1.value !== inputField2.value
+      ? (showErrorStatus(inputField1, 'Passwords do not match'),
+        showErrorStatus(inputField2, 'Passwords do not match'))
+      : (showSuccessStatus(inputField1), showSuccessStatus(inputField2));
   }
 }
 

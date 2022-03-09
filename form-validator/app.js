@@ -19,7 +19,13 @@ function showSuccess(input) {
 }
 
 // Check email validity
-function isValidEmail(email) {}
+function isValidEmail(email) {
+  String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+}
 
 // Event listeners
 form.addEventListener('submit', function (e) {
@@ -29,9 +35,13 @@ form.addEventListener('submit', function (e) {
     ? showError(username, 'Username is required')
     : showSuccess(username);
 
-  email.value === ''
-    ? showError(email, 'Email is required')
-    : showSuccess(email);
+  if (email.value === '') {
+    showError(email, 'Email is required');
+  } else if (!isValidEmail(email.value)) {
+    showError('Email is invalid');
+  } else {
+    showSuccess(email);
+  }
 
   password.value === ''
     ? showError(password, 'Password is required')

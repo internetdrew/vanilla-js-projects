@@ -20,11 +20,13 @@ function showSuccess(input) {
 
 // Check email validity
 function isValidEmail(email) {
-  String(email)
+  return String(email)
     .toLowerCase()
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+    )
+    ? true
+    : false;
 }
 
 // Event listeners
@@ -38,7 +40,7 @@ form.addEventListener('submit', function (e) {
   if (email.value === '') {
     showError(email, 'Email is required');
   } else if (!isValidEmail(email.value)) {
-    showError('Email is invalid');
+    showError(email, 'Email is invalid');
   } else {
     showSuccess(email);
   }

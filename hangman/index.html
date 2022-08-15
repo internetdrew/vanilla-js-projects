@@ -11,7 +11,20 @@
       crossorigin="anonymous"
     ></script>
     <script defer src="./app.js"></script>
-    <title>Document</title>
+    <title>Hangman</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Hangman</h1>
+    <p>Find the hidden word. Enter a letter to begin.</p>
+
+    <div class="game-container">
+      <!-- Pole -->
+      <svg height="250" width="200" class="figure-container">
+        <line x1="60" y1="20" x2="140" y2="20"></line>
+        <line x1="140" y1="20" x2="140" y2="50"></line>
+        <line x1="60" y1="20" x2="60" y2="230"></line>
+        <line x1="20" y1="230" x2="100" y2="230"></line>
+      </svg>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://kit.fontawesome.com/62494c37af.js"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="./app.js"></script>
+    <script
+      defer
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      defer
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <title>DOM Array Methods</title>
+  </head>
+  <body>
+    <h1>DOM Array Methods</h1>
+
+    <div class="container">
+      <aside>
+        <button id="add-user">
+          Add User <ion-icon name="person-add-outline"></ion-icon>
+        </button>
+        <button id="double">
+          Double Money <ion-icon name="trending-up-outline"></ion-icon>
+        </button>
+        <button id="show-millionaires">
+          Show Only Millionaires <ion-icon name="diamond-outline"></ion-icon>
+        </button>
+        <button id="sort">
+          Sort by Richest <ion-icon name="arrow-down-outline"></ion-icon>
+        </button>
+        <button id="calculate-wealth">
+          Calculate Entire Wealth
+          <ion-icon name="calculator-outline"></ion-icon>
+        </button>
+      </aside>
+
+      <main id="main">
+        <h2><strong>Person</strong> Wealth</h2>
+        <div id="user-list"></div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -47,8 +47,9 @@ const displayWord = function () {
   }
 };
 
-window.addEventListener('keydown', e => {
+const handleLetter = function (e) {
   if (e.code !== `Key${e.key.toUpperCase()}`) return;
+
   const letter = e.key;
 
   if (selectedWord.includes(letter) && !correctLetters.includes(letter)) {
@@ -57,6 +58,8 @@ window.addEventListener('keydown', e => {
   }
 
   if (!selectedWord.includes(letter)) wrongLetters.push(letter);
-});
+};
+
+window.addEventListener('keydown', handleLetter);
 
 displayWord();

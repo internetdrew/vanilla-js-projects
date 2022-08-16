@@ -30,7 +30,9 @@ const updateWrongLettersEl = function () {
 
   const html = `
  ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''} 
- ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+ ${wrongLetters.map(
+   (letter, index) => `<span>${index === 0 ? letter : ` ${letter}`}</span>`
+ )}
  `;
 
   wrongLettersEl.insertAdjacentHTML('afterbegin', html);

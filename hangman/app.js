@@ -24,7 +24,7 @@ const clearHTML = function (parentEl) {
 
 // Show the hidden word
 const displayWord = function () {
-  wordEl.innerHTML = `
+  const markup = `
  ${selectedWord
    .split('')
    .map(
@@ -36,6 +36,9 @@ const displayWord = function () {
    )
    .join('')}
  `;
+
+  clearHTML(wordEl);
+  wordEl.insertAdjacentHTML('afterbegin', markup);
 };
 
 displayWord();

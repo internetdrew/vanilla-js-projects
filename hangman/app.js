@@ -13,7 +13,7 @@ const words = ['application', 'programming', 'interface', 'wizard'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetters = [];
+const correctLetters = ['w', 'i', 'z', 'a', 'r', 'd'];
 const wrongLetters = [];
 
 const clearHTML = function (parentEl) {
@@ -24,7 +24,7 @@ const clearHTML = function (parentEl) {
 
 // Show the hidden word
 const displayWord = function () {
-  const markup = `
+  const html = `
  ${selectedWord
    .split('')
    .map(
@@ -38,7 +38,14 @@ const displayWord = function () {
  `;
 
   clearHTML(wordEl);
-  wordEl.insertAdjacentHTML('afterbegin', markup);
+  wordEl.insertAdjacentHTML('afterbegin', html);
+
+  const innerWord = wordEl.innerText.replace(/\n/g, '');
+
+  if (innerWord === selectedWord) {
+    finalMessage.textContent = 'Congratulations! You won!';
+    popup.style.display = 'flex';
+  }
 };
 
 displayWord();

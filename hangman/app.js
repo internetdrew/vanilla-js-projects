@@ -15,10 +15,33 @@ let selectedWord = words[Math.floor(Math.random() * words.length)];
 const correctLetters = [];
 const wrongLetters = [];
 
-const clearHTML = function (parentEl) {
+const clearElementsFrom = function (parentEl) {
   while (parentEl.firstChild) {
     parentEl.removeChild(parentEl.firstChild);
   }
+};
+
+const showPopup = function () {
+  popup.style.display = 'flex';
+};
+
+const updateWrongLettersEl = function () {
+  clearElementsFrom(wrongLettersEl);
+
+  const html = `
+ ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''} 
+ ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+ `;
+
+  wrongLettersEl.insertAdjacentHTML('afterbegin', html);
+};
+
+const showNotification = function () {
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 2000);
 };
 
 // Show the hidden word
@@ -36,14 +59,14 @@ const displayWord = function () {
    .join('')}
    `;
 
-  clearHTML(wordEl);
+  clearElementsFrom(wordEl);
   wordEl.insertAdjacentHTML('afterbegin', html);
 
   const innerWord = wordEl.innerText.replace(/\n/g, '');
 
   if (innerWord === selectedWord) {
     finalMessage.textContent = 'Congratulations! You won!';
-    popup.style.display = 'flex';
+    showPopup();
   }
 };
 
@@ -52,14 +75,19 @@ const handleLetter = function (e) {
 
   const letter = e.key;
 
+  if (correctLetters.includes(letter) || wrongLetters.includes(letter))
+    return showNotification();
+
   if (selectedWord.includes(letter) && !correctLetters.includes(letter)) {
     correctLetters.push(letter);
     displayWord();
   }
 
-  if (!selectedWord.includes(letter)) wrongLetters.push(letter);
+  if (!selectedWord.includes(letter) && !wrongLetters.includes(letter)) {
+    wrongLetters.push(letter);
+    updateWrongLettersEl();
+  }
 };
 
+window.addEventListener('load', displayWord);
 window.addEventListener('keydown', handleLetter);
-
-displayWord();

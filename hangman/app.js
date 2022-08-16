@@ -16,6 +16,12 @@ let selectedWord = words[Math.floor(Math.random() * words.length)];
 const correctLetters = [];
 const wrongLetters = [];
 
+const clearHTML = function (parentEl) {
+  while (parentEl.childElement) {
+    parentEl.removeChild(parentEl.childElement);
+  }
+};
+
 // Show the hidden word
 const displayWord = function () {
   wordEl.innerHTML = `

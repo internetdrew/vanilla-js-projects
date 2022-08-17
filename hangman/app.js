@@ -10,8 +10,8 @@ const finalMessage = document.getElementById('final-message');
 const figureParts = document.querySelectorAll('.figure-part');
 
 const words = ['application', 'programming', 'interface', 'wizard'];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
 
+let selectedWord = words[Math.floor(Math.random() * words.length)];
 const correctLetters = [];
 const wrongLetters = [];
 
@@ -25,6 +25,10 @@ const showPopup = function () {
   popup.style.display = 'flex';
 };
 
+const hidePopup = function () {
+  popup.style.display = 'none';
+};
+
 const updateWrongLettersEl = function () {
   clearElementsFrom(wrongLettersEl);
 
@@ -36,6 +40,19 @@ const updateWrongLettersEl = function () {
  `;
 
   wrongLettersEl.insertAdjacentHTML('afterbegin', html);
+
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length;
+
+    index < errors
+      ? (part.style.display = 'block')
+      : (part.style.display = 'none');
+  });
+
+  if (wrongLetters.length === figureParts.length) {
+    finalMessage.textContent = 'Sorry, you lost.';
+    showPopup();
+  }
 };
 
 const showNotification = function () {
@@ -91,5 +108,22 @@ const handleLetter = function (e) {
   }
 };
 
+const clearArr = function (arr) {
+  arr.splice(0);
+};
+
+const playAgain = function () {
+  //Empty the arrays
+  clearArr(correctLetters);
+  clearArr(wrongLetters);
+
+  selectedWord = words[Math.floor(Math.random() * words.length)];
+  displayWord();
+
+  updateWrongLettersEl();
+  hidePopup();
+};
+
 window.addEventListener('load', displayWord);
 window.addEventListener('keydown', handleLetter);
+playAgainBtn.addEventListener('click', playAgain);

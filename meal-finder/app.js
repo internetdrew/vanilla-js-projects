@@ -7,7 +7,7 @@ const search = document.getElementById('search'),
   resultHeading = document.getElementById('result-heading'),
   single_mealEl = document.getElementById('single-meal');
 
-const clearElementsFrom = function (parentEl) {
+const removeChildElementsFrom = function (parentEl) {
   while (parentEl.firstChild) {
     parentEl.removeChild(parentEl.firstChild);
   }
@@ -18,13 +18,15 @@ const searchMeal = function (e) {
   e.preventDefault();
 
   // Clear single meal element
-  clearElementsFrom(single_mealEl);
+  removeChildElementsFrom(single_mealEl);
 
   // Get search term
   const term = search.value;
 
   // Check for empty search on submit
   if (!term.trim()) return;
+
+  //
 };
 
 submit.addEventListener('submit', searchMeal);

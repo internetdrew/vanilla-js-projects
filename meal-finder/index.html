@@ -11,7 +11,31 @@
       crossorigin="anonymous"
     ></script>
     <script defer src="./app.js"></script>
-    <title>Document</title>
+    <title>Meal Finder</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1>Meal Finder</h1>
+
+      <div class="flex">
+        <form class="flex" id="submit">
+          <input
+            type="text"
+            id="search"
+            placeholder="Search for meals or main ingredients"
+          />
+          <button class="search-btn" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+        <button class="random-btn" id="random">
+          <i class="fas fa-random"></i>
+        </button>
+      </div>
+
+      <div class="result-heading"></div>
+      <div class="meals" id="meals"></div>
+      <div id="single-meal"></div>
+    </div>
+  </body>
 </html>

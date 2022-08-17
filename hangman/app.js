@@ -108,14 +108,14 @@ const handleLetter = function (e) {
   }
 };
 
-const clearArr = function (arr) {
+const emptyArray = function (arr) {
   arr.splice(0);
 };
 
 const playAgain = function () {
   //Empty the arrays
-  clearArr(correctLetters);
-  clearArr(wrongLetters);
+  emptyArray(correctLetters);
+  emptyArray(wrongLetters);
 
   selectedWord = words[Math.floor(Math.random() * words.length)];
   displayWord();

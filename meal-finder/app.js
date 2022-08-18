@@ -5,8 +5,7 @@ const search = document.getElementById('search'),
   random = document.getElementById('random'),
   mealsEl = document.getElementById('meals'),
   resultHeading = document.getElementById('result-heading'),
-  single_mealEl = document.getElementById('single-meal'),
-  resultCount = document.getElementById('result-count');
+  single_mealEl = document.getElementById('single-meal');
 
 const removeChildElementsFrom = function (parentEl) {
   while (parentEl.firstChild) {
@@ -19,7 +18,7 @@ const clearElValue = function (el) {
 };
 
 const showResult = function (msg) {
-  resultCount.textContent = msg;
+  resultHeading.textContent = msg;
 };
 
 // Search meal and fetch from API

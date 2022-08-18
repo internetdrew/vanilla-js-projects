@@ -52,7 +52,6 @@ const searchMeal = async function (e) {
     }
 
     if (meals) {
-      console.log(meals);
       showResult(`Showing ${meals.length} meals made with ${term}:`);
       clearElValue(search);
     }
@@ -91,4 +90,29 @@ const searchMeal = async function (e) {
   //
 };
 
+const getElementById = function (mealID) {};
+
+// Fetch meal by ID
+const getMealByID = async function (mealID) {
+  const res = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
+  );
+  const data = await res.json();
+  const meal = data.meals;
+  console.log(meal[0].strMeal);
+};
+
 submit.addEventListener('submit', searchMeal);
+mealsEl.addEventListener('click', e => {
+  const mealInfo = e.path.find(item => {
+    if (!item.classList) return;
+
+    return item.classList.contains('meal-info');
+  });
+
+  if (!mealInfo) return;
+
+  const mealID = mealInfo.getAttribute('data-mealID');
+
+  getMealByID(mealID);
+});

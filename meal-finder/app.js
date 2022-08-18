@@ -39,14 +39,22 @@ const searchMeal = async function (e) {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
     );
     if (!res.ok) throw new Error('Trouble fetching response');
-    const data = await res.json();
 
+    const data = await res.json();
     const { meals } = data;
 
     if (!meals) {
-      showResult(`There are no ${term} recipes available at this time.`);
+      showResult(
+        `There are no ${term} recipes available at this time. Please try again.`
+      );
       clearElValue(search);
-      throw new Error('No meal available matching search term.');
+      return;
+    }
+
+    if (meals) {
+      console.log(meals);
+      showResult(`Showing ${meals.length} meals made with ${term}:`);
+      clearElValue(search);
     }
 
     if (term === 'dick') {
@@ -58,11 +66,24 @@ const searchMeal = async function (e) {
         } made with ${term}!`
       );
       clearElValue(search);
-      return;
     }
 
-    showResult(`Showing ${meals.length} meals made with ${term}:`);
-    clearElValue(search);
+    removeChildElementsFrom(mealsEl);
+
+    meals
+      .map(meal => {
+        const markup = `
+      <div class="meal">
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+        <div class="meal-info" data-mealID="${meal.idMeal}">
+         <h3>${meal.strMeal}</h3>
+        </div>
+      </div>
+      `;
+
+        mealsEl.insertAdjacentHTML('afterbegin', markup);
+      })
+      .join('');
   } catch (error) {
     // console.error(error);
   }

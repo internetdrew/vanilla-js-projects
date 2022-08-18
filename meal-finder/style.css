@@ -69,6 +69,13 @@ input[type='text'] {
   border-bottom-right-radius: 0.5rem;
 }
 
+.result-heading {
+  margin-top: 1rem;
+  text-align: left;
+  padding: 0.2rem;
+  text-align: center;
+}
+
 .meals {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

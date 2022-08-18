@@ -32,6 +32,7 @@ const searchMeal = async function (e) {
 
     // Get search term
     const term = search.value.toLowerCase().trim();
+
     // Check for empty search on submit
     if (!term.trim()) return;
 
@@ -45,7 +46,7 @@ const searchMeal = async function (e) {
 
     if (!meals) {
       showResult(`There are no ${term} recipes available at this time.`);
-      search.value = '';
+      clearElValue(search);
       throw new Error('No meal available matching search term.');
     }
 

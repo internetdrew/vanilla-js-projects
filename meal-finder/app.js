@@ -48,6 +48,7 @@ const searchMeal = async function (e) {
         `There are no ${term} recipes available at this time. Please try again.`
       );
       clearElValue(search);
+      removeChildElementsFrom(mealsEl);
       return;
     }
 
@@ -118,11 +119,17 @@ const getMealIngredients = function (meal) {
 
 // Add the meal to the DOM
 const addMealToDOM = function (meal) {
+  console.log(meal);
   const ingredients = getMealIngredients(meal);
 
   const markup = `
   <div class="single-meal">
     <h1>${meal.strMeal}</h1>
+    ${ingredients
+      .map(ing => {
+        return `<li class="ingredient">${ing}</li>`;
+      })
+      .join('')}
   </div>
   `;
 

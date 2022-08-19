@@ -90,12 +90,8 @@ const searchMeal = async function (e) {
   //
 };
 
-// Add the meal to the DOM
-const addMealToDOM = function (meal) {
-  console.log(meal);
-
+const getMealIngredients = function (meal) {
   const entries = Object.entries(meal);
-  console.log(entries);
 
   const ingredients = entries
     .filter(
@@ -113,11 +109,17 @@ const addMealToDOM = function (meal) {
     )
     .map(entry => entry[1]);
 
-  const allIngredients = measurements.map((measurement, index) => {
-    return `${measurement} ${ingredients[index].trim()}`;
-  });
+  const allIngredients = measurements.map(
+    (measurement, index) => `${measurement} ${ingredients[index]}`
+  );
 
-  console.log(allIngredients);
+  return allIngredients;
+};
+
+// Add the meal to the DOM
+const addMealToDOM = function (meal) {
+  const ingredients = getMealIngredients(meal);
+
   const markup = `
   <div class="single-meal">
     <h1>${meal.strMeal}</h1>

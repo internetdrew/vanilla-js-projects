@@ -94,7 +94,20 @@ const searchMeal = async function (e) {
 const addMealToDOM = function (meal) {
   console.log(meal);
 
-  const ingredients = Object.keys(meal);
+  const entries = Object.entries(meal);
+  console.log(entries);
+
+  const ingredients = entries
+    .filter(entry => {
+      if (
+        entry[0].includes('strIngredient') &&
+        entry[1] !== null &&
+        entry[1] !== ''
+      ) {
+        return entry[1];
+      }
+    })
+    .map(ingArr => ingArr[1]);
   console.log(ingredients);
 
   const markup = `

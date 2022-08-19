@@ -90,7 +90,8 @@ const searchMeal = async function (e) {
   //
 };
 
-const getElementById = function (mealID) {};
+// Add the meal to the DOM
+const addMealToDOM = function (mealObj) {};
 
 // Fetch meal by ID
 const getMealByID = async function (mealID) {
@@ -98,9 +99,12 @@ const getMealByID = async function (mealID) {
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
   );
   const data = await res.json();
-  const meal = data.meals;
-  console.log(meal[0].strMeal);
+  const meal = data.meals[0];
+  console.log(meal);
+  addMealToDOM(meal);
 };
+
+const showSingleMealInfo = function (e) {};
 
 submit.addEventListener('submit', searchMeal);
 mealsEl.addEventListener('click', e => {

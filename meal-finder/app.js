@@ -44,11 +44,11 @@ const searchMeal = async function (e) {
     const { meals } = data;
 
     if (!meals) {
+      clearElValue(search);
+      removeChildElementsFrom(mealsEl);
       showResult(
         `There are no ${term} recipes available at this time. Please try again.`
       );
-      clearElValue(search);
-      removeChildElementsFrom(mealsEl);
       return;
     }
 

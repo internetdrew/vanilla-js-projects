@@ -98,16 +98,15 @@ const addMealToDOM = function (meal) {
   console.log(entries);
 
   const ingredients = entries
-    .filter(entry => {
-      if (
+    .filter(
+      entry =>
         entry[0].includes('strIngredient') &&
         entry[1] !== null &&
         entry[1] !== ''
-      ) {
-        return entry[1];
-      }
-    })
-    .map(ingArr => ingArr[1]);
+    )
+    .map(ing => ing[1]);
+
+  // const measurements = entries.filter(entry => )
   console.log(ingredients);
 
   const markup = `

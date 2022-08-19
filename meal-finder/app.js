@@ -104,13 +104,24 @@ const addMealToDOM = function (meal) {
         entry[1] !== null &&
         entry[1] !== ''
     )
-    .map(ing => ing[1]);
+    .map(entry => entry[1]);
 
-  // const measurements = entries.filter(entry => )
-  console.log(ingredients);
+  const measurements = entries
+    .filter(
+      entry =>
+        entry[0].includes('strMeasure') && entry[1] !== null && entry[1] !== ''
+    )
+    .map(entry => entry[1]);
 
+  const allIngredients = measurements.map((measurement, index) => {
+    return `${measurement} ${ingredients[index].trim()}`;
+  });
+
+  console.log(allIngredients);
   const markup = `
-  
+  <div class="single-meal">
+    <h1>${meal.strMeal}</h1>
+  </div>
   `;
 
   clearElValue(single_mealEl);
@@ -125,7 +136,6 @@ const getMealByID = async function (mealID) {
   );
   const data = await res.json();
   const meal = data.meals[0];
-  console.log(meal);
   addMealToDOM(meal);
 };
 

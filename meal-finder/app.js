@@ -102,7 +102,6 @@ const getMealIngredients = function (meal) {
         entry[1].trim()
     )
     .map(entry => entry[1]);
-  console.log(ingredients);
 
   const measurements = entries
     .filter(
@@ -110,7 +109,11 @@ const getMealIngredients = function (meal) {
         entry[0].includes('strMeasure') && entry[1] !== null && entry[1].trim()
     )
     .map(entry => entry[1]);
-  console.log(measurements);
+
+  if (ingredients.length !== measurements.length)
+    throw new Error(
+      'The ingredients and measurements arrays are not the same length.'
+    );
 
   const allIngredients = measurements.map(
     (measurement, index) => `${measurement} ${ingredients[index]}`
@@ -122,7 +125,6 @@ const getMealIngredients = function (meal) {
 // Add the meal to the DOM
 const addMealToDOM = function (meal) {
   const ingredients = getMealIngredients(meal);
-  console.log(ingredients);
 
   const markup = `
   <div class="single-meal">

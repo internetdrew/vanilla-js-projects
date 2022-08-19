@@ -155,10 +155,7 @@ const getMealByID = async function (mealID) {
   addMealToDOM(meal);
 };
 
-const showSingleMealInfo = function (e) {};
-
-submit.addEventListener('submit', searchMeal);
-mealsEl.addEventListener('click', e => {
+const getMealInfo = function (e) {
   const mealInfo = e.path.find(item =>
     item.classList ? item.classList.contains('meal-info') : false
   );
@@ -168,4 +165,7 @@ mealsEl.addEventListener('click', e => {
   const mealID = mealInfo.getAttribute('data-mealID');
 
   getMealByID(mealID);
-});
+};
+
+submit.addEventListener('submit', searchMeal);
+mealsEl.addEventListener('click', getMealInfo);

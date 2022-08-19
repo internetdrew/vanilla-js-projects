@@ -99,16 +99,18 @@ const getMealIngredients = function (meal) {
       entry =>
         entry[0].includes('strIngredient') &&
         entry[1] !== null &&
-        entry[1] !== ''
+        entry[1].trim()
     )
     .map(entry => entry[1]);
+  console.log(ingredients);
 
   const measurements = entries
     .filter(
       entry =>
-        entry[0].includes('strMeasure') && entry[1] !== null && entry[1] !== ''
+        entry[0].includes('strMeasure') && entry[1] !== null && entry[1].trim()
     )
     .map(entry => entry[1]);
+  console.log(measurements);
 
   const allIngredients = measurements.map(
     (measurement, index) => `${measurement} ${ingredients[index]}`
@@ -119,21 +121,24 @@ const getMealIngredients = function (meal) {
 
 // Add the meal to the DOM
 const addMealToDOM = function (meal) {
-  console.log(meal);
   const ingredients = getMealIngredients(meal);
+  console.log(ingredients);
 
   const markup = `
   <div class="single-meal">
     <h1>${meal.strMeal}</h1>
+    <div class="ingredients">
     ${ingredients
       .map(ing => {
         return `<li class="ingredient">${ing}</li>`;
       })
       .join('')}
+    </div>
+    
   </div>
   `;
 
-  clearElValue(single_mealEl);
+  removeChildElementsFrom(single_mealEl);
 
   single_mealEl.insertAdjacentHTML('afterbegin', markup);
 };

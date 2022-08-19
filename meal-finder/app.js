@@ -108,11 +108,9 @@ const showSingleMealInfo = function (e) {};
 
 submit.addEventListener('submit', searchMeal);
 mealsEl.addEventListener('click', e => {
-  const mealInfo = e.path.find(item => {
-    if (!item.classList) return;
-
-    return item.classList.contains('meal-info');
-  });
+  const mealInfo = e.path.find(item =>
+    item.classList ? item.classList.contains('meal-info') : false
+  );
 
   if (!mealInfo) return;
 

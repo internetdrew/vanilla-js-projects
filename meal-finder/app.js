@@ -129,13 +129,13 @@ const addMealToDOM = function (meal) {
   const markup = `
   <div class="single-meal">
     <h1>${meal.strMeal}</h1>
-    <div class="ingredients">
+    <ul class="ingredients">
     ${ingredients
       .map(ing => {
         return `<li class="ingredient">${ing}</li>`;
       })
       .join('')}
-    </div>
+    </ul>
     
   </div>
   `;

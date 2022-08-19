@@ -91,7 +91,20 @@ const searchMeal = async function (e) {
 };
 
 // Add the meal to the DOM
-const addMealToDOM = function (mealObj) {};
+const addMealToDOM = function (meal) {
+  console.log(meal);
+
+  const ingredients = Object.keys(meal);
+  console.log(ingredients);
+
+  const markup = `
+  
+  `;
+
+  clearElValue(single_mealEl);
+
+  single_mealEl.insertAdjacentHTML('afterbegin', markup);
+};
 
 // Fetch meal by ID
 const getMealByID = async function (mealID) {

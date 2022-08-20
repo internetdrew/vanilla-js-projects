@@ -133,7 +133,7 @@ const addMealToDOM = function (meal) {
   const markup = `
   <div class="single-meal">
     <h2>${meal.strMeal}</h2>
-    <img src="${meal.strMealThumb}" alt="${meal.strMeal.toLowerCase()}" />
+    <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
     <div class="single-meal-info">
       ${meal.strCategory ? `<p>${meal.strCategory}</p>` : ''}
       ${meal.strArea ? `<p>${meal.strArea}</p>` : ''}
@@ -151,7 +151,6 @@ const addMealToDOM = function (meal) {
         .join('')}
       </ul>
     </div>
-
   </div>
   `;
 

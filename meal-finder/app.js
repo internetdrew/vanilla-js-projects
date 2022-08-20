@@ -128,10 +128,7 @@ const addMealToDOM = function (meal) {
   const instructions = meal.strInstructions
     .split(/\r\n/g)
     .filter(el => el !== '')
-    .map(instruction => {
-      const reg = /\d\W /;
-      return instruction.replace(reg, '');
-    });
+    .map(instruction => instruction.replace(/\d\W /, ''));
   console.log(instructions);
 
   const markup = `

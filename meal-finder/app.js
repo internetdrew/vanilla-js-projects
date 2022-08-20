@@ -127,23 +127,31 @@ const addMealToDOM = function (meal) {
   const ingredients = getMealIngredients(meal);
   const instructions = meal.strInstructions
     .split(/\r\n/g)
-    .filter(ins => ins.trim());
+    .map(instruction => instruction.trim());
   console.log(instructions);
 
   const markup = `
   <div class="single-meal">
     <h2>${meal.strMeal}</h2>
-    <h3>Ingredients</h3>
-    <ul class="ingredients">
-    ${ingredients.map(ing => `<li class="ingredient">${ing}</li>`).join('')}
-    </ul>
+    <img src="${meal.strMealThumb}" alt="${meal.strMeal.toLowerCase()}" />
+    <div class="single-meal-info">
+      ${meal.strCategory ? `<p>${meal.strCategory}</p>` : ''}
+      ${meal.strArea ? `<p>${meal.strArea}</p>` : ''}
+    </div>
+    <div class="main">
+      <h2>Ingredients</h2>
+      <ul class="ingredients">
+       ${ingredients.map(ing => `<li class="ingredient">${ing}</li>`).join('')}
+      </ul>
 
-    <h3>Instructions</h3>
-    <ul class="instructions">
-    ${instructions
-      .map(ins => `<li class="instruction">${ins.trim()}</li>`)
-      .join('')}
-    </ul>
+      <h3>Instructions</h3>
+      <ul class="instructions">
+      ${instructions
+        .map(instruction => `<li class="instruction">${instruction}</li>`)
+        .join('')}
+      </ul>
+    </div>
+
   </div>
   `;
 

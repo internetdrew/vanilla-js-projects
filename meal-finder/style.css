@@ -146,15 +146,21 @@ input[type='text'] {
 }
 
 .single-meal ul {
+  list-style-type: none;
   padding-left: 0;
   text-align: left;
 }
 
-.ingredients {
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 2.4rem;
+.ingredients li {
+  border: 0.1rem solid #ededed;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  display: inline-block;
+  color: #2d2013;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
 }
 
 .instructions li {

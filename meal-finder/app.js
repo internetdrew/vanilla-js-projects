@@ -38,7 +38,7 @@ const searchMeal = async function (e) {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
     );
-    if (!res.ok) throw new Error('Trouble fetching response');
+    if (!res.ok) throw new Error('Trouble fetching from the API');
 
     const data = await res.json();
     const { meals } = data;
@@ -85,10 +85,8 @@ const searchMeal = async function (e) {
       })
       .join('');
   } catch (error) {
-    // console.error(error);
+    console.error(error);
   }
-
-  //
 };
 
 const getMealIngredients = function (meal) {
@@ -124,24 +122,32 @@ const getMealIngredients = function (meal) {
 
 // Add the meal to the DOM
 const addMealToDOM = function (meal) {
+  console.log(meal);
+
   const ingredients = getMealIngredients(meal);
+  const instructions = meal.strInstructions
+    .split(/\r\n/g)
+    .filter(ins => ins.trim());
+  console.log(instructions);
 
   const markup = `
   <div class="single-meal">
-    <h1>${meal.strMeal}</h1>
+    <h2>${meal.strMeal}</h2>
+    <h3>Ingredients</h3>
     <ul class="ingredients">
-    ${ingredients
-      .map(ing => {
-        return `<li class="ingredient">${ing}</li>`;
-      })
+    ${ingredients.map(ing => `<li class="ingredient">${ing}</li>`).join('')}
+    </ul>
+
+    <h3>Instructions</h3>
+    <ul class="instructions">
+    ${instructions
+      .map(ins => `<li class="instruction">${ins.trim()}</li>`)
       .join('')}
     </ul>
-    
   </div>
   `;
 
   removeChildElementsFrom(single_mealEl);
-
   single_mealEl.insertAdjacentHTML('afterbegin', markup);
 };
 

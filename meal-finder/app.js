@@ -127,7 +127,11 @@ const addMealToDOM = function (meal) {
   const ingredients = getMealIngredients(meal);
   const instructions = meal.strInstructions
     .split(/\r\n/g)
-    .map(instruction => instruction.trim());
+    .filter(el => el !== '')
+    .map(instruction => {
+      const reg = /\d\W /;
+      return instruction.replace(reg, '');
+    });
   console.log(instructions);
 
   const markup = `
@@ -144,7 +148,7 @@ const addMealToDOM = function (meal) {
        ${ingredients.map(ing => `<li class="ingredient">${ing}</li>`).join('')}
       </ul>
 
-      <h3>Instructions</h3>
+      <h2>Instructions</h2>
       <ul class="instructions">
       ${instructions
         .map(instruction => `<li class="instruction">${instruction}</li>`)

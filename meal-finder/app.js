@@ -159,6 +159,27 @@ const addMealToDOM = function (meal) {
   single_mealEl.insertAdjacentHTML('afterbegin', markup);
 };
 
+// Fetch random meal
+const getRandomMeal = async function () {
+  try {
+    removeChildElementsFrom(mealsEl);
+    removeChildElementsFrom(single_mealEl);
+    clearElValue(search);
+    showResult('');
+
+    const res = await fetch(
+      'https://www.themealdb.com/api/json/v1/1/random.php'
+    );
+    if (!res.ok) throw new Error('Trouble fetching a random recipe');
+    const data = await res.json();
+
+    const meal = data.meals[0];
+    addMealToDOM(meal);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // Fetch meal by ID
 const getMealByID = async function (mealID) {
   const res = await fetch(
@@ -183,3 +204,4 @@ const getMealInfo = function (e) {
 
 submit.addEventListener('submit', searchMeal);
 mealsEl.addEventListener('click', getMealInfo);
+random.addEventListener('click', getRandomMeal);

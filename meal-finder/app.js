@@ -7,7 +7,7 @@ const search = document.getElementById('search'),
   resultHeading = document.getElementById('result-heading'),
   single_mealEl = document.getElementById('single-meal');
 
-const removeChildElementsFrom = function (parentEl) {
+const removeChildElsFrom = function (parentEl) {
   while (parentEl.firstChild) {
     parentEl.removeChild(parentEl.firstChild);
   }
@@ -27,7 +27,7 @@ const searchMeal = async function (e) {
     e.preventDefault();
 
     // Clear single meal element
-    removeChildElementsFrom(single_mealEl);
+    removeChildElsFrom(single_mealEl);
 
     // Get search term
     const term = search.value.toLowerCase().trim();
@@ -45,7 +45,7 @@ const searchMeal = async function (e) {
 
     if (!meals) {
       clearElValue(search);
-      removeChildElementsFrom(mealsEl);
+      removeChildElsFrom(mealsEl);
       showResult(
         `There are no ${term} recipes available at this time. Please try again.`
       );
@@ -68,7 +68,7 @@ const searchMeal = async function (e) {
       clearElValue(search);
     }
 
-    removeChildElementsFrom(mealsEl);
+    removeChildElsFrom(mealsEl);
 
     meals
       .map(meal => {
@@ -155,15 +155,15 @@ const addMealToDOM = function (meal) {
   </div>
   `;
 
-  removeChildElementsFrom(single_mealEl);
+  removeChildElsFrom(single_mealEl);
   single_mealEl.insertAdjacentHTML('afterbegin', markup);
 };
 
 // Fetch random meal
 const getRandomMeal = async function () {
   try {
-    removeChildElementsFrom(mealsEl);
-    removeChildElementsFrom(single_mealEl);
+    removeChildElsFrom(mealsEl);
+    removeChildElsFrom(single_mealEl);
     clearElValue(search);
     showResult('');
 

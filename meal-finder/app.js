@@ -127,7 +127,7 @@ const addMealToDOM = function (meal) {
   const ingredients = getMealIngredients(meal);
   const instructions = meal.strInstructions
     .split(/\r\n/g)
-    .filter(el => el !== '')
+    .filter(el => el.trim())
     .map(instruction => instruction.replace(/\d\W /, ''));
   console.log(instructions);
 

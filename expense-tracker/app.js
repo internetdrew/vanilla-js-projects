@@ -71,17 +71,29 @@ const updateValues = function () {
   money_minus.textContent = `${formatUSD(expense)}`;
 };
 
+const getFieldName = function (input) {
+  const fieldName = input.id.charAt(0).toUpperCase() + input.id.slice(1);
+
+  if (fieldName === 'Password2') return 'Password confirmation';
+  return fieldName;
+};
+
+const showInputStatus = function (inputEl, errorMsg) {
+  const formControl = inputEl.parentElement;
+  const small = formControl.querySelector('small');
+
+  small.style.visibility = 'visible';
+  small.textContent = errorMsg;
+};
+
 const addTransaction = function (e) {
   e.preventDefault();
 
   const [...inputs] = form.querySelectorAll('.form-control input');
-
   inputs.forEach(input => {
-    const formControl = input.parentElement;
-    const small = formControl.querySelector('small');
     if (!input.value.trim()) {
-      small.style.visibility = 'visible';
-      small.textContent = 'Please add a value';
+      showInputStatus(input);
+      return;
     }
   });
 };

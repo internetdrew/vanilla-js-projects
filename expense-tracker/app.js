@@ -82,6 +82,14 @@ const showInputStatus = function (inputEl, errorMsg) {
   const formControl = inputEl.parentElement;
   const small = formControl.querySelector('small');
 
+  if (!errorMsg) formControl.className = 'form-control success';
+
+  if (errorMsg) {
+    formControl.className = 'form-control error';
+    const small = formControl.querySelector('small');
+    small.textContent = errorMsg;
+  }
+
   small.style.visibility = 'visible';
   small.textContent = errorMsg;
 };

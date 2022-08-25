@@ -153,8 +153,3 @@ input[type='number'] {
 .list li:hover .delete-btn {
   opacity: 1;
 }
-
-small {
-  visibility: hidden;
-  color: #c92a2a;
-}

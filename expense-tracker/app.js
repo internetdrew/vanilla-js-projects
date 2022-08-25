@@ -71,9 +71,25 @@ const updateValues = function () {
   money_minus.textContent = `${formatUSD(expense)}`;
 };
 
+const addTransaction = function (e) {
+  e.preventDefault();
+
+  const [...inputs] = form.querySelectorAll('.form-control input');
+
+  inputs.forEach(input => {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    if (!input.value.trim()) {
+      small.style.visibility = 'visible';
+      small.textContent = 'Please add a value';
+    }
+  });
+};
+
 const init = function () {
   addTransactionsToDOM();
   updateValues();
 };
 
 window.addEventListener('load', init);
+form.addEventListener('submit', addTransaction);

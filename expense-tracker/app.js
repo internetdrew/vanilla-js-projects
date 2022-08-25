@@ -25,6 +25,13 @@ const capFirstLetter = function (str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+const formatNumber = function (number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(number);
+};
+
 // Add transactions to DOM list
 const addTransactionsToDOM = function () {
   clearHTMLFrom(list);
@@ -44,4 +51,29 @@ const addTransactionsToDOM = function () {
   });
 };
 
-window.addEventListener('load', addTransactionsToDOM);
+// Update the balance income and expense
+const updateValues = function () {
+  const amounts = transactions.map(transaction => transaction.amount);
+
+  const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  balance.textContent = `$${total}`;
+
+  const income = amounts
+    .filter(amount => amount > 0)
+    .reduce((acc, item) => (acc += item), 0);
+
+  money_plus.textContent = `+${formatNumber(income)}`;
+
+  const expense = amounts
+    .filter(amount => amount < 0)
+    .reduce((acc, item) => (acc += item), 0);
+
+  money_minus.textContent = `${formatNumber(expense)}`;
+};
+
+const init = function () {
+  addTransactionsToDOM();
+  updateValues();
+};
+
+window.addEventListener('load', init);

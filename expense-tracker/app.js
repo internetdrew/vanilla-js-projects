@@ -89,9 +89,6 @@ const showInputStatus = function (inputEl, errorMsg) {
     const small = formControl.querySelector('small');
     small.textContent = errorMsg;
   }
-
-  small.style.visibility = 'visible';
-  small.textContent = errorMsg;
 };
 
 const addTransaction = function (e) {

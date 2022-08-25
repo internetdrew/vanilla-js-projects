@@ -25,7 +25,7 @@ const capFirstLetter = function (str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-const formatNumber = function (number) {
+const formatUSD = function (number) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',

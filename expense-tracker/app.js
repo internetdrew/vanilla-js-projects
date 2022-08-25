@@ -23,8 +23,9 @@ const clearHTMLFrom = function (parentEl) {
 
 // Add transactions to DOM list
 const addTransactionsToDOM = function () {
+  clearHTMLFrom(list);
+
   transactions.forEach(transaction => {
-    // Get sign
     const sign = transaction.amount < 0 ? '-' : '+';
 
     const html = `

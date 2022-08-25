@@ -80,7 +80,6 @@ const getFieldName = function (input) {
 
 const showInputStatus = function (inputEl, errorMsg) {
   const formControl = inputEl.parentElement;
-  const small = formControl.querySelector('small');
 
   if (!errorMsg) formControl.className = 'form-control success';
 

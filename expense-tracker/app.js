@@ -21,6 +21,10 @@ const clearHTMLFrom = function (parentEl) {
   while (parentEl.firstChild) parentEl.removeChild(parentEl.firstChild);
 };
 
+const capFirstLetter = function (str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 // Add transactions to DOM list
 const addTransactionsToDOM = function () {
   clearHTMLFrom(list);
@@ -30,9 +34,7 @@ const addTransactionsToDOM = function () {
 
     const html = `
      <li class="${transaction.amount < 0 ? 'minus' : 'plus'}">
-      ${
-        transaction.text.charAt(0).toUpperCase() + transaction.text.slice(1)
-      } <span>${sign}${Math.abs(
+      ${capFirstLetter(transaction.text)} <span>${sign}${Math.abs(
       transaction.amount
     )}</span><button class="delete-btn">x</button>
      </li>

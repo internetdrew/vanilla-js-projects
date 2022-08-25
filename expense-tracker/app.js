@@ -41,7 +41,9 @@ const addTransactionsToDOM = function () {
 
     const html = `
      <li class="${transaction.amount < 0 ? 'minus' : 'plus'}">
-      ${capFirstLetter(transaction.text)} <span>${sign}${Math.abs(
+      ${capFirstLetter(transaction.text)} <span>${
+      sign === '+' ? sign : ''
+    }${formatNumber(
       transaction.amount
     )}</span><button class="delete-btn">x</button>
      </li>
@@ -56,18 +58,16 @@ const updateValues = function () {
   const amounts = transactions.map(transaction => transaction.amount);
 
   const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
-  balance.textContent = `$${total}`;
+  balance.textContent = `${formatNumber(total)}`;
 
   const income = amounts
     .filter(amount => amount > 0)
     .reduce((acc, item) => (acc += item), 0);
-
   money_plus.textContent = `+${formatNumber(income)}`;
 
   const expense = amounts
     .filter(amount => amount < 0)
     .reduce((acc, item) => (acc += item), 0);
-
   money_minus.textContent = `${formatNumber(expense)}`;
 };
 

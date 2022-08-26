@@ -71,43 +71,33 @@ const updateValues = function () {
   money_minus.textContent = `${formatUSD(expense)}`;
 };
 
-const getFieldName = function (input) {
-  const fieldName = input.id.charAt(0).toUpperCase() + input.id.slice(1);
-
-  if (fieldName === 'Password2') return 'Password confirmation';
-  return fieldName;
-};
+const getFieldName = inputEl =>
+  inputEl.id.charAt(0).toUpperCase() + inputEl.id.slice(1);
 
 const showInputStatus = function (inputEl, errorMsg) {
   const formControl = inputEl.parentElement;
 
   if (!errorMsg) {
-    console.log('success');
     formControl.className = 'form-control success';
   }
 
   if (errorMsg) {
-    console.log('error');
     formControl.className = 'form-control error';
     const small = formControl.querySelector('small');
     small.textContent = errorMsg;
   }
 };
 
+const checkRequired = function (inputArr) {};
+
 const addTransaction = function (e) {
   e.preventDefault();
+  checkRequired();
 
-  const [...inputs] = form.querySelectorAll('.form-control input');
-  inputs.forEach(input => {
-    if (!input.value.trim()) {
-      showInputStatus(input, 'Please add a value before submission.');
-      return;
-    }
-
-    if (input.value.trim()) {
-      showInputStatus(input);
-    }
-  });
+  const transaction = {
+    id: `${+transactions[transactions.length - 1].id + 1}`,
+  };
+  console.log(transaction);
 };
 
 const init = function () {

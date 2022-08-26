@@ -88,16 +88,30 @@ const showInputStatus = function (inputEl, errorMsg) {
   }
 };
 
-const checkRequired = function (inputArr) {};
+const checkReisquired = function (inputArr) {
+  inputArr.forEach(input => {
+    if (!input.value.trim()) {
+      showInputStatus(input, `${getFieldName(input)} is required.`);
+    }
+  });
+};
+
+const isValidInput = function (input) {
+  return input.value !== '';
+};
 
 const addTransaction = function (e) {
   e.preventDefault();
-  checkRequired();
 
-  const transaction = {
-    id: `${+transactions[transactions.length - 1].id + 1}`,
-  };
-  console.log(transaction);
+  const [...inputs] = document.querySelectorAll('.form-control input');
+  const validInputs = inputs.every(isValidInput);
+
+  if (validInputs) {
+    const transaction = {
+      id: `${+transactions[transactions.length - 1].id + 1}`,
+    };
+    console.log(transaction);
+  }
 };
 
 const init = function () {

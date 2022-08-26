@@ -98,11 +98,29 @@ const checkRequired = function (inputArr) {
   });
 };
 
+const isValidInput = function (input) {
+  return input.value !== '';
+};
+
+const resetInputs = function () {};
+
 const addTransaction = function (e) {
   e.preventDefault();
 
   const [...inputs] = document.querySelectorAll('.form-control input');
   checkRequired(inputs);
+
+  const allInputsValid = inputs.every(isValidInput);
+  if (!allInputsValid) return;
+
+  const transaction = {
+    id: +`${transactions.length + 1}`,
+    text: text.value,
+    amount: +amount.value,
+  };
+
+  transactions.push(transaction);
+  addTransactionsToDOM();
 };
 
 const init = function () {

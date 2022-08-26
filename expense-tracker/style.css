@@ -153,3 +153,20 @@ input[type='number'] {
 .list li:hover .delete-btn {
   opacity: 1;
 }
+
+.form-control.success input {
+  outline: 0.15rem solid #51cf66;
+}
+
+.form-control.success small {
+  visibility: hidden;
+}
+
+.form-control.error input {
+  outline: 0.15rem solid #c92a2a;
+}
+
+.form-control.error small {
+  visibility: visible;
+  color: #c92a2a;
+}

@@ -81,9 +81,13 @@ const getFieldName = function (input) {
 const showInputStatus = function (inputEl, errorMsg) {
   const formControl = inputEl.parentElement;
 
-  if (!errorMsg) formControl.className = 'form-control success';
+  if (!errorMsg) {
+    console.log('success');
+    formControl.className = 'form-control success';
+  }
 
   if (errorMsg) {
+    console.log('error');
     formControl.className = 'form-control error';
     const small = formControl.querySelector('small');
     small.textContent = errorMsg;
@@ -96,8 +100,12 @@ const addTransaction = function (e) {
   const [...inputs] = form.querySelectorAll('.form-control input');
   inputs.forEach(input => {
     if (!input.value.trim()) {
-      showInputStatus(input);
+      showInputStatus(input, 'Please add a value before submission.');
       return;
+    }
+
+    if (input.value.trim()) {
+      showInputStatus(input);
     }
   });
 };

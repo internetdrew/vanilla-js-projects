@@ -154,12 +154,12 @@ input[type='number'] {
   opacity: 1;
 }
 
-.form-control.success input {
-  outline: 0.15rem solid #51cf66;
+.form-control small {
+  visibility: hidden;
 }
 
-.form-control.success small {
-  visibility: hidden;
+.form-control.success input {
+  outline: 0.15rem solid #51cf66;
 }
 
 .form-control.error input {

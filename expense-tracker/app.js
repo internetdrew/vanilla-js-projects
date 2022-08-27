@@ -6,7 +6,8 @@ const balance = document.getElementById('balance'),
   list = document.getElementById('list'),
   form = document.getElementById('form'),
   text = document.getElementById('text'),
-  amount = document.getElementById('amount');
+  amount = document.getElementById('amount'),
+  [...inputs] = document.querySelectorAll('.form-control input');
 
 const dummyTransactions = [
   { id: 1, text: 'flowers', amount: -20 },
@@ -107,7 +108,6 @@ const resetInputs = function () {};
 const addTransaction = function (e) {
   e.preventDefault();
 
-  const [...inputs] = document.querySelectorAll('.form-control input');
   checkRequired(inputs);
 
   const allInputsValid = inputs.every(isValidInput);

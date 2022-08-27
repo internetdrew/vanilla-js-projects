@@ -103,7 +103,14 @@ const isValidInput = function (input) {
   return input.value !== '';
 };
 
-const resetInputs = function () {};
+const resetInputs = function () {
+  inputs.forEach(input => {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control';
+
+    input.value = '';
+  });
+};
 
 const addTransaction = function (e) {
   e.preventDefault();
@@ -120,6 +127,7 @@ const addTransaction = function (e) {
   };
 
   transactions.push(transaction);
+  resetInputs();
   addTransactionsToDOM();
 };
 

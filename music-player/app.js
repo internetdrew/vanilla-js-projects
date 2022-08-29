@@ -29,9 +29,7 @@ const loadSong = function () {
 };
 
 const playSong = function (e) {
-  musicContainer.classList.contains('play')
-    ? musicContainer.classList.remove('play')
-    : musicContainer.classList.add('play');
+  musicContainer.classList.toggle('play');
 };
 
 window.addEventListener('load', loadSong);

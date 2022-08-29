@@ -29,23 +29,23 @@ const playSong = function () {
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
   audio.play();
-  return;
 };
 const pauseSong = function () {
   musicContainer.classList.remove('play');
   playBtn.querySelector('i.fas').classList.remove('fa-pause');
   playBtn.querySelector('i.fas').classList.add('fa-play');
   audio.pause();
-  return;
 };
 
 const togglePlay = function (e) {
   if (!musicContainer.classList.contains('play')) {
     playSong();
+    return;
   }
 
   if (musicContainer.classList.contains('play')) {
     pauseSong();
+    return;
   }
 };
 

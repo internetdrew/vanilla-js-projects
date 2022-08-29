@@ -9,14 +9,19 @@ const balance = document.getElementById('balance'),
   amount = document.getElementById('amount'),
   [...inputs] = document.querySelectorAll('.form-control input');
 
-const dummyTransactions = [
-  { id: 1, text: 'flowers', amount: -20 },
-  { id: 2, text: 'car', amount: 300 },
-  { id: 3, text: 'liquor', amount: -10 },
-  { id: 4, text: 'wool sweater', amount: 150 },
-];
+// const dummyTransactions = [
+//   { id: 1, text: 'flowers', amount: -20 },
+//   { id: 2, text: 'car', amount: 300 },
+//   { id: 3, text: 'liquor', amount: -10 },
+//   { id: 4, text: 'wool sweater', amount: 150 },
+// ];
 
-let transactions = dummyTransactions;
+const localStorageTransactions = JSON.parse(
+  localStorage.getItem('transactions')
+);
+
+let transactions =
+  localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
 
 const clearHTMLFrom = function (parentEl) {
   while (parentEl.firstChild) parentEl.removeChild(parentEl.firstChild);
@@ -129,6 +134,7 @@ const addTransaction = function (e) {
   };
 
   transactions.push(transaction);
+  updateLocalStorage();
   init();
 };
 
@@ -140,8 +146,14 @@ const deleteTransaction = function (e) {
       transaction => transaction.id !== transactionID
     );
 
+    updateLocalStorage();
+
     init();
   }
+};
+
+const updateLocalStorage = function () {
+  localStorage.setItem('transactions', JSON.stringify(transactions));
 };
 
 const init = function () {

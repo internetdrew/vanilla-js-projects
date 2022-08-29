@@ -13,12 +13,12 @@ const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 
-// Song titles
 const songs = ['hey', 'summer', 'ukulele'];
-const songIndex = 2;
+let songIndex = 2;
 
 // Initially load song details into DOM
-const loadSong = function (song) {
+const loadSong = function () {
+  const song = songs[songIndex];
   title.textContent = song;
   audio.src = `./music/${song}.mp3`;
   cover.src = `./images/${song}.jpg`;
@@ -51,15 +51,30 @@ const togglePlay = function (e) {
 
 const prevSong = function () {
   songIndex--;
+
+  if (songIndex < 0) songIndex = songs.length - 1;
+
+  loadSong();
+  playSong();
 };
 
-const nextSong = function () {};
+const nextSong = function () {
+  songIndex++;
 
-const init = function () {
-  loadSong(songs[songIndex]);
+  if (songIndex > songs.length - 1) songIndex = 0;
+
+  loadSong();
+  playSong();
 };
 
-window.addEventListener('load', init);
+const updateProgress = function (e) {
+  const { duration, currentTime } = e.srcElement;
+  console.log(duration, currentTime);
+};
+
+window.addEventListener('load', loadSong);
 playBtn.addEventListener('click', togglePlay);
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+
+audio.addEventListener('timeupdate', updateProgress);

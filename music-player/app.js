@@ -15,33 +15,51 @@ const cover = document.getElementById('cover');
 
 // Song titles
 const songs = ['hey', 'summer', 'ukulele'];
+const songIndex = 2;
 
 // Initially load song details into DOM
-const loadRandomSong = function () {
-  const song = songs[Math.floor(Math.random() * songs.length)];
-
+const loadSong = function (song) {
   title.textContent = song;
   audio.src = `./music/${song}.mp3`;
   cover.src = `./images/${song}.jpg`;
 };
 
+const playSong = function () {
+  musicContainer.classList.add('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-play');
+  playBtn.querySelector('i.fas').classList.add('fa-pause');
+  audio.play();
+};
+const pauseSong = function () {
+  musicContainer.classList.remove('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-pause');
+  playBtn.querySelector('i.fas').classList.add('fa-play');
+  audio.pause();
+};
+
 const togglePlay = function (e) {
   if (!musicContainer.classList.contains('play')) {
-    musicContainer.classList.add('play');
-    playBtn.querySelector('i.fas').classList.remove('fa-play');
-    playBtn.querySelector('i.fas').classList.add('fa-pause');
-    audio.play();
+    playSong();
     return;
   }
 
   if (musicContainer.classList.contains('play')) {
-    musicContainer.classList.remove('play');
-    playBtn.querySelector('i.fas').classList.remove('fa-pause');
-    playBtn.querySelector('i.fas').classList.add('fa-play');
-    audio.pause();
+    pauseSong();
     return;
   }
 };
 
-window.addEventListener('load', loadRandomSong);
+const prevSong = function () {
+  songIndex--;
+};
+
+const nextSong = function () {};
+
+const init = function () {
+  loadSong(songs[songIndex]);
+};
+
+window.addEventListener('load', init);
 playBtn.addEventListener('click', togglePlay);
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);

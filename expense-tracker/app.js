@@ -129,21 +129,23 @@ const addTransaction = function (e) {
   };
 
   transactions.push(transaction);
-  resetInputs();
-  addTransactionsToDOM();
-  updateValues();
+  init();
 };
 
-const removeTransaction = function (e) {
+const deleteTransaction = function (e) {
   if (e.target.className === 'delete-btn') {
     const transactionID = +e.target.parentElement.getAttribute('data-id');
-    removeTransaction(transactionID);
+
+    transactions = transactions.filter(
+      transaction => transaction.id !== transactionID
+    );
+
+    init();
   }
 };
 
-const deleteTransaction = function (id) {};
-
 const init = function () {
+  resetInputs();
   addTransactionsToDOM();
   updateValues();
 };

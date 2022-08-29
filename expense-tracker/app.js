@@ -41,7 +41,9 @@ const addTransactionsToDOM = function () {
     const sign = transaction.amount < 0 ? '-' : '+';
 
     const html = `
-     <li class="${transaction.amount < 0 ? 'minus' : 'plus'}">
+     <li class="${transaction.amount < 0 ? 'minus' : 'plus'}" data-id="${
+      transaction.id
+    }">
       ${capFirstLetter(transaction.text)} <span>${
       sign === '+' ? sign : ''
     }${formatUSD(
@@ -129,7 +131,17 @@ const addTransaction = function (e) {
   transactions.push(transaction);
   resetInputs();
   addTransactionsToDOM();
+  updateValues();
 };
+
+const deleteTransaction = function (e) {
+  if (e.target.className === 'delete-btn') {
+    const transactionID = +e.target.parentElement.getAttribute('data-id');
+    removeTransaction(transactionID);
+  }
+};
+
+const removeTransaction = function (id) {};
 
 const init = function () {
   addTransactionsToDOM();
@@ -138,3 +150,4 @@ const init = function () {
 
 window.addEventListener('load', init);
 form.addEventListener('submit', addTransaction);
+list.addEventListener('click', deleteTransaction);

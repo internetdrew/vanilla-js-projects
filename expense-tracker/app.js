@@ -129,16 +129,16 @@ const addTransaction = function (e) {
 };
 
 const deleteTransaction = function (e) {
-  if (e.target.className === 'delete-btn') {
-    const transactionID = +e.target.parentElement.getAttribute('data-id');
+  if (e.target.className !== 'delete-btn') return;
 
-    transactions = transactions.filter(
-      transaction => transaction.id !== transactionID
-    );
+  const transactionID = +e.target.parentElement.getAttribute('data-id');
 
-    updateLocalStorage();
-    init();
-  }
+  transactions = transactions.filter(
+    transaction => transaction.id !== transactionID
+  );
+
+  updateLocalStorage();
+  init();
 };
 
 const updateLocalStorage = function () {

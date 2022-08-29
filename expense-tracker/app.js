@@ -9,13 +9,6 @@ const balance = document.getElementById('balance'),
   amount = document.getElementById('amount'),
   [...inputs] = document.querySelectorAll('.form-control input');
 
-// const dummyTransactions = [
-//   { id: 1, text: 'flowers', amount: -20 },
-//   { id: 2, text: 'car', amount: 300 },
-//   { id: 3, text: 'liquor', amount: -10 },
-//   { id: 4, text: 'wool sweater', amount: 150 },
-// ];
-
 const localStorageTransactions = JSON.parse(
   localStorage.getItem('transactions')
 );
@@ -38,7 +31,6 @@ const formatUSD = function (number) {
   }).format(number);
 };
 
-// Add transactions to DOM list
 const addTransactionsToDOM = function () {
   clearHTMLFrom(list);
 
@@ -48,8 +40,7 @@ const addTransactionsToDOM = function () {
     const html = `
      <li class="${transaction.amount < 0 ? 'minus' : 'plus'}" data-id="${
       transaction.id
-    }">
-      ${capFirstLetter(transaction.text)} <span>${
+    }">${capFirstLetter(transaction.text)}<span>${
       sign === '+' ? sign : ''
     }${formatUSD(
       transaction.amount
@@ -61,7 +52,6 @@ const addTransactionsToDOM = function () {
   });
 };
 
-// Update the balance income and expense
 const updateValues = function () {
   const amounts = transactions.map(transaction => transaction.amount);
 
@@ -147,7 +137,6 @@ const deleteTransaction = function (e) {
     );
 
     updateLocalStorage();
-
     init();
   }
 };

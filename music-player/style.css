@@ -104,6 +104,10 @@ body {
   font-size: 3rem;
 }
 
+.music-container:not(.play) .action-btn#play {
+  color: #777;
+}
+
 .action-btn:focus {
   outline: 0;
 }

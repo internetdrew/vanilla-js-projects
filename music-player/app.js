@@ -28,9 +28,9 @@ const loadSong = function () {
   cover.src = `./images/${song}.jpg`;
 };
 
-const playSong = function (e) {
+const togglePlay = function (e) {
   musicContainer.classList.toggle('play');
 };
 
 window.addEventListener('load', loadSong);
-playBtn.addEventListener('click', playSong);
+playBtn.addEventListener('click', togglePlay);

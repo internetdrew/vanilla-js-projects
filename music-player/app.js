@@ -15,7 +15,6 @@ const cover = document.getElementById('cover');
 
 const songs = ['hey', 'summer', 'ukulele'];
 
-// Initially load song details into DOM
 const loadSong = function () {
   const song = songs[Math.floor(Math.random() * songs.length)];
   title.textContent = song;

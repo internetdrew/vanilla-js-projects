@@ -14,11 +14,10 @@ const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 
 const songs = ['hey', 'summer', 'ukulele'];
-let songIndex = 2;
 
 // Initially load song details into DOM
 const loadSong = function () {
-  const song = songs[songIndex];
+  const song = songs[Math.floor(Math.random() * songs.length)];
   title.textContent = song;
   audio.src = `./music/${song}.mp3`;
   cover.src = `./images/${song}.jpg`;
@@ -50,6 +49,8 @@ const togglePlay = function (e) {
 };
 
 const prevSong = function () {
+  let songIndex = songs.indexOf(title.textContent);
+
   songIndex--;
 
   if (songIndex < 0) songIndex = songs.length - 1;
@@ -59,6 +60,8 @@ const prevSong = function () {
 };
 
 const nextSong = function () {
+  let songIndex = songs.indexOf(title.textContent);
+
   songIndex++;
 
   if (songIndex > songs.length - 1) songIndex = 0;
@@ -69,7 +72,6 @@ const nextSong = function () {
 
 const updateProgress = function (e) {
   const { duration, currentTime } = e.srcElement;
-  console.log(duration, currentTime);
 };
 
 window.addEventListener('load', loadSong);

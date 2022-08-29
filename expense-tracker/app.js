@@ -134,14 +134,14 @@ const addTransaction = function (e) {
   updateValues();
 };
 
-const deleteTransaction = function (e) {
+const removeTransaction = function (e) {
   if (e.target.className === 'delete-btn') {
     const transactionID = +e.target.parentElement.getAttribute('data-id');
     removeTransaction(transactionID);
   }
 };
 
-const removeTransaction = function (id) {};
+const deleteTransaction = function (id) {};
 
 const init = function () {
   addTransactionsToDOM();

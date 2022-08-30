@@ -1,10 +1,10 @@
 'use strict';
 
 const postContainer = document.getElementById('posts-container'),
-  loading = document.getElementById('loader'),
+  loader = document.getElementById('loader'),
   filter = document.getElementById('filter');
 
-let limit = 3;
+let limit = 5;
 let page = 1;
 
 const removeChildElsFrom = function (parentEl) {
@@ -47,5 +47,17 @@ const showPosts = async function () {
     .join();
 };
 
+const showLoading = function () {
+  loader.classList.add('show');
+};
+
+const showMorePosts = function () {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+    showLoading();
+  }
+};
+
 window.addEventListener('load', showPosts);
-window.addEventListener('scroll', () => {});
+window.addEventListener('scroll', showMorePosts);

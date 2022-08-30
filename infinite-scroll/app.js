@@ -62,32 +62,22 @@ const showMorePosts = function () {
 
 const filterPosts = function (e) {
   const searchTerm = e.target.value.toUpperCase();
-  const [...posts] = document.querySelectorAll('.post');
+  const posts = document.querySelectorAll('.post');
 
-  // posts.forEach(post => {
-  //   const title = post.querySelector('.post-title').textContent.toUpperCase();
-  //   const body = post.querySelector('.post-body').textContent.toUpperCase();
+  posts.forEach(post => {
+    const title = post.querySelector('.post-title').textContent.toUpperCase();
+    const body = post.querySelector('.post-body').textContent.toUpperCase();
 
-  //   if (title.indexOf(searchTerm) > -1) {
-  //     console.log('post');
-  //   }
-  // });
+    if (title.indexOf(searchTerm) > -1 || body.indexOf(searchTerm) > -1) {
+      post.style.display = 'flex';
+      return;
+    }
 
-  console.log(posts);
-  const filtered = posts
-    .filter(post => {
-      const title = post.querySelector('.post-title').textContent.toUpperCase();
-      const body = post.querySelector('.post-body').textContent.toUpperCase();
-
-      return title.indexOf(searchTerm) > -1 || body.indexOf(searchTerm) > -1;
-    })
-    .map(post => {
-      const newPost = {
-        id: +post.querySelector('.number').textContent,
-      };
-      return newPost;
-    });
-  console.log(filtered);
+    if (!title.indexOf(searchTerm) > -1 || !body.indexOf(searchTerm) > -1) {
+      post.style.display = 'none';
+      return;
+    }
+  });
 };
 
 window.addEventListener('load', showPosts);

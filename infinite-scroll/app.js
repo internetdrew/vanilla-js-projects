@@ -60,5 +60,30 @@ const showMorePosts = function () {
   }
 };
 
+const filterPosts = function (e) {
+  const searchTerm = e.target.value.toUpperCase();
+  const [...posts] = document.querySelectorAll('.post');
+
+  // posts.forEach(post => {
+  //   const title = post.querySelector('.post-title').textContent.toUpperCase();
+  //   const body = post.querySelector('.post-body').textContent.toUpperCase();
+
+  //   if (title.indexOf(searchTerm) > -1) {
+  //     console.log('post');
+  //   }
+  // });
+
+  console.log(posts);
+  const filtered = posts.filter(post => {
+    const title = post.querySelector('.post-title').textContent.toUpperCase();
+    const body = post.querySelector('.post-body').textContent.toUpperCase();
+
+    if (title.indexOf(searchTerm) > -1 || body.indexOf(searchTerm) > -1)
+      return post;
+  });
+  console.log(filtered);
+};
+
 window.addEventListener('load', showPosts);
 window.addEventListener('scroll', showMorePosts);
+filter.addEventListener('input', filterPosts);

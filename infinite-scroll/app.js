@@ -47,4 +47,5 @@ const showPosts = async function () {
     .join();
 };
 
-showPosts();
+window.addEventListener('load', showPosts);
+window.addEventListener('scroll', () => {});

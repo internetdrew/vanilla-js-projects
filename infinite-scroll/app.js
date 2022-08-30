@@ -74,13 +74,19 @@ const filterPosts = function (e) {
   // });
 
   console.log(posts);
-  const filtered = posts.filter(post => {
-    const title = post.querySelector('.post-title').textContent.toUpperCase();
-    const body = post.querySelector('.post-body').textContent.toUpperCase();
+  const filtered = posts
+    .filter(post => {
+      const title = post.querySelector('.post-title').textContent.toUpperCase();
+      const body = post.querySelector('.post-body').textContent.toUpperCase();
 
-    if (title.indexOf(searchTerm) > -1 || body.indexOf(searchTerm) > -1)
-      return post;
-  });
+      return title.indexOf(searchTerm) > -1 || body.indexOf(searchTerm) > -1;
+    })
+    .map(post => {
+      const newPost = {
+        id: +post.querySelector('.number').textContent,
+      };
+      return newPost;
+    });
   console.log(filtered);
 };
 

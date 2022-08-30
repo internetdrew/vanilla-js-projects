@@ -15,8 +15,7 @@ const cover = document.getElementById('cover');
 
 const songs = ['hey', 'summer', 'ukulele'];
 
-const loadSong = function () {
-  const song = songs[Math.floor(Math.random() * songs.length)];
+const loadSong = function (song) {
   title.textContent = song;
   audio.src = `./music/${song}.mp3`;
   cover.src = `./images/${song}.jpg`;
@@ -54,7 +53,7 @@ const prevSong = function () {
 
   if (songIndex < 0) songIndex = songs.length - 1;
 
-  loadSong();
+  loadSong(songs[songIndex]);
   playSong();
 };
 
@@ -62,18 +61,23 @@ const nextSong = function () {
   let songIndex = songs.indexOf(title.textContent);
 
   songIndex++;
-
   if (songIndex > songs.length - 1) songIndex = 0;
 
-  loadSong();
+  loadSong(songs[songIndex]);
   playSong();
 };
 
 const updateProgress = function (e) {
   const { duration, currentTime } = e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
 };
 
-window.addEventListener('load', loadSong);
+const init = function () {
+  loadSong(songs[0]);
+};
+
+window.addEventListener('load', init);
 playBtn.addEventListener('click', togglePlay);
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);

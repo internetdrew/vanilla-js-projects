@@ -1,6 +1,6 @@
 'use strict';
 
-const postContainer = document.getElementById('post-container'),
+const postContainer = document.getElementById('posts-container'),
   loading = document.getElementById('loader'),
   filter = document.getElementById('filter');
 

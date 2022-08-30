@@ -7,12 +7,6 @@ const postContainer = document.getElementById('posts-container'),
 let limit = 5;
 let page = 1;
 
-const removeChildElsFrom = function (parentEl) {
-  while (parentEl.firstChild) {
-    parentEl.removeChild(parentEl.firstChild);
-  }
-};
-
 const getPosts = async function () {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`
@@ -25,8 +19,6 @@ const getPosts = async function () {
 
 const showPosts = async function () {
   const posts = await getPosts();
-
-  removeChildElsFrom(postContainer);
 
   posts
     .map(post => {
@@ -49,6 +41,15 @@ const showPosts = async function () {
 
 const showLoading = function () {
   loader.classList.add('show');
+
+  setTimeout(() => {
+    loader.classList.remove('show');
+
+    setTimeout(() => {
+      page++;
+      showPosts();
+    }, 300);
+  }, 1000);
 };
 
 const showMorePosts = function () {

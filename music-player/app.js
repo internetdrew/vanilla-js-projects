@@ -34,7 +34,7 @@ const pauseSong = function () {
   audio.pause();
 };
 
-const togglePlay = function (e) {
+const togglePlay = function () {
   if (!musicContainer.classList.contains('play')) {
     playSong();
     return;
@@ -68,7 +68,6 @@ const nextSong = function () {
 };
 
 const setProgress = function (e) {
-  console.log(this);
   const width = this.clientWidth;
   const clickX = e.offsetX;
   const duration = audio.duration;
@@ -92,4 +91,6 @@ prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 
 audio.addEventListener('timeupdate', updateProgress);
+audio.addEventListener('ended', nextSong);
+
 progressContainer.addEventListener('click', setProgress);

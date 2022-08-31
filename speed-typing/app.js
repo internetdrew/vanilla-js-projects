@@ -66,5 +66,10 @@ const handleInput = function (e) {
   }
 };
 
+const changeDifficulty = function (e) {
+  game.difficulty = e.target.value;
+};
+
 window.addEventListener('load', init);
 text.addEventListener('input', handleInput);
+difficultySelect.addEventListener('change', changeDifficulty);

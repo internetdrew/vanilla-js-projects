@@ -49,12 +49,14 @@ const init = async function () {
   addWordToDOM();
 };
 
-window.addEventListener('load', init);
-text.addEventListener('input', e => {
+const handleInput = function (e) {
   const insertedText = e.target.value;
 
   if (insertedText === game.activeWord) {
     addWordToDOM();
     text.value = '';
   }
-});
+};
+
+window.addEventListener('load', init);
+text.addEventListener('input', handleInput);

@@ -61,8 +61,8 @@ const handleInput = function (e) {
 
   if (insertedText === game.activeWord) {
     addWordToDOM();
-    text.value = '';
     increaseScore();
+    e.target.value = '';
   }
 };
 

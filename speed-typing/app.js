@@ -13,19 +13,48 @@ const wordEl = document.getElementById('word'),
 const game = {
   score: 0,
   time: 10,
+  words: [],
+  activeWord: '',
 };
 
-const getRandomWord = async function () {
-  const res = await fetch('https://random-word-api.herokuapp.com/word');
+const fetchWordsArr = async function () {
+  const res = await fetch(
+    'https://random-word-api.herokuapp.com/word?number=50'
+  );
   if (!res.ok) throw new Error('Trouble getting response from API');
 
-  const [word] = await res.json();
+  const wordsArr = await res.json();
+  return wordsArr;
+};
+
+const addWordsToGame = async function () {
+  game.words = await fetchWordsArr();
+};
+
+const getRandomWord = function () {
+  const word = game.words[Math.floor(Math.random() * game.words.length)];
+  game.activeWord = word;
   return word;
 };
 
-const addWordToDOM = async function () {
-  const word = await getRandomWord();
+const addWordToDOM = function () {
+  const word = getRandomWord();
   wordEl.textContent = word;
 };
 
-addWordToDOM();
+const init = async function () {
+  fetchWordsArr();
+  await addWordsToGame();
+  getRandomWord();
+  addWordToDOM();
+};
+
+window.addEventListener('load', init);
+text.addEventListener('input', e => {
+  const insertedText = e.target.value;
+
+  if (insertedText === game.activeWord) {
+    addWordToDOM();
+    text.value = '';
+  }
+});

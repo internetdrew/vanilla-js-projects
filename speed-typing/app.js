@@ -14,12 +14,13 @@ const game = {
   score: 0,
   time: 10,
   words: [],
+  wordCount: 50,
   activeWord: '',
 };
 
 const fetchWordsArr = async function () {
   const res = await fetch(
-    'https://random-word-api.herokuapp.com/word?number=50'
+    `https://random-word-api.herokuapp.com/word?number=${game.wordCount}`
   );
   if (!res.ok) throw new Error('Trouble getting response from API');
 

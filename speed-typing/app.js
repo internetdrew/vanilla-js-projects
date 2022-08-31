@@ -4,7 +4,7 @@ const wordEl = document.getElementById('word'),
   text = document.getElementById('text'),
   scoreEl = document.querySelector('.score-container'),
   timeEl = document.getElementById('time'),
-  endGameEl = document.getElementById('end-game'),
+  endGameEl = document.getElementById('end-game-container'),
   settingsBtn = document.getElementById('settings-btn'),
   settings = document.getElementById('settings'),
   settingsForm = document.getElementById('settings-form'),
@@ -17,6 +17,7 @@ const game = {
   wordCount: 50,
   activeWord: '',
   difficulty: difficultySelect.value,
+  timeToAdd: 5,
 };
 
 const fetchWordsArr = async function () {
@@ -49,14 +50,6 @@ const increaseScore = function () {
   scoreEl.querySelector('span').textContent = game.score;
 };
 
-const init = async function () {
-  fetchWordsArr();
-  await addWordsToGame();
-  getRandomWord();
-  addWordToDOM();
-  text.focus();
-};
-
 const handleInput = function (e) {
   const insertedText = e.target.value;
 
@@ -64,11 +57,51 @@ const handleInput = function (e) {
     addWordToDOM();
     increaseScore();
     e.target.value = '';
+
+    game.time += game.timeToAdd;
+    decreaseTime();
   }
 };
 
+const gameOver = function () {
+  const html = `
+ <h1>Time ran out</h1>
+ <p>Your final score is ${game.score}</p>
+ <button onclick="location.reload()">Reload</button>
+ `;
+
+  endGameEl.insertAdjacentHTML('afterbegin', html);
+  endGameEl.style.display = 'flex';
+};
+
+const decreaseTime = function () {
+  game.time--;
+  timeEl.textContent = `${game.time}s`;
+
+  if (game.time === 0) {
+    clearInterval(timeInterval);
+    gameOver();
+  }
+};
+const timeInterval = setInterval(decreaseTime, 1000);
+
 const changeDifficulty = function (e) {
   game.difficulty = e.target.value;
+  localStorage.setItem('difficulty', game.difficulty);
+
+  if (game.difficulty === 'easy') game.timeToAdd = 5;
+
+  if (game.difficulty === 'medium') game.timeToAdd = 3;
+
+  if (game.difficulty === 'hard') game.timeToAdd = 1;
+};
+
+const init = async function () {
+  fetchWordsArr();
+  await addWordsToGame();
+  getRandomWord();
+  addWordToDOM();
+  text.focus();
 };
 
 window.addEventListener('load', init);

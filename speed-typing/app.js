@@ -107,3 +107,4 @@ const init = async function () {
 window.addEventListener('load', init);
 text.addEventListener('input', handleInput);
 difficultySelect.addEventListener('change', changeDifficulty);
+settingsBtn.addEventListener('click', () => settings.classList.toggle('hide'));

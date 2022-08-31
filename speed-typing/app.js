@@ -16,6 +16,7 @@ const game = {
   words: [],
   wordCount: 50,
   activeWord: '',
+  difficulty: difficultySelect.value,
 };
 
 const fetchWordsArr = async function () {

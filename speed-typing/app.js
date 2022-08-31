@@ -93,9 +93,17 @@ const changeDifficulty = function (e) {
 };
 
 const updateAddTime = function () {
-  if (game.difficulty === 'easy') game.timeToAdd = 5;
-  if (game.difficulty === 'medium') game.timeToAdd = 3;
-  if (game.difficulty === 'hard') game.timeToAdd = 1;
+  switch (game.difficulty) {
+    case 'easy':
+      game.timeToAdd = 5;
+      break;
+    case 'medium':
+      game.timeToAdd = 3;
+      break;
+    case 'hard':
+      game.timeToAdd = 1;
+      break;
+  }
 };
 
 const setDifficulty = function () {

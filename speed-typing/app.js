@@ -2,7 +2,7 @@
 
 const wordEl = document.getElementById('word'),
   text = document.getElementById('text'),
-  scoreEl = document.getElementById('score'),
+  scoreEl = document.querySelector('.score-container'),
   timeEl = document.getElementById('time'),
   endGameEl = document.getElementById('end-game'),
   settingsBtn = document.getElementById('settings-btn'),
@@ -43,6 +43,11 @@ const addWordToDOM = function () {
   wordEl.textContent = word;
 };
 
+const increaseScore = function () {
+  game.score++;
+  scoreEl.querySelector('span').textContent = game.score;
+};
+
 const init = async function () {
   fetchWordsArr();
   await addWordsToGame();
@@ -56,6 +61,7 @@ const handleInput = function (e) {
   if (insertedText === game.activeWord) {
     addWordToDOM();
     text.value = '';
+    increaseScore();
   }
 };
 

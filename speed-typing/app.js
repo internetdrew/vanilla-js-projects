@@ -16,7 +16,9 @@ const game = {
   words: [],
   wordCount: 50,
   activeWord: '',
-  difficulty: difficultySelect.value,
+  difficulty: localStorage.getItem('difficulty')
+    ? localStorage.getItem('difficulty')
+    : difficultySelect.value,
   timeToAdd: 5,
 };
 
@@ -86,17 +88,25 @@ const decreaseTime = function () {
 const timeInterval = setInterval(decreaseTime, 1000);
 
 const changeDifficulty = function (e) {
-  game.difficulty = e.target.value;
-  localStorage.setItem('difficulty', game.difficulty);
+  const difficulty = e.target.value;
+  localStorage.setItem('difficulty', difficulty);
+};
 
+const updateAddTime = function () {
   if (game.difficulty === 'easy') game.timeToAdd = 5;
-
   if (game.difficulty === 'medium') game.timeToAdd = 3;
-
   if (game.difficulty === 'hard') game.timeToAdd = 1;
 };
 
+const setDifficulty = function () {
+  difficultySelect.value = localStorage.getItem('difficulty')
+    ? localStorage.getItem('difficulty')
+    : 'easy';
+};
+
 const init = async function () {
+  setDifficulty();
+  updateAddTime();
   fetchWordsArr();
   await addWordsToGame();
   getRandomWord();

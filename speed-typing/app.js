@@ -52,9 +52,9 @@ const increaseScore = function () {
 const init = async function () {
   fetchWordsArr();
   await addWordsToGame();
-  text.focus();
   getRandomWord();
   addWordToDOM();
+  text.focus();
 };
 
 const handleInput = function (e) {

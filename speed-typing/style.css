@@ -118,6 +118,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 2rem;
   position: absolute;
   top: 0;
   left: 0;

@@ -90,6 +90,7 @@ const timeInterval = setInterval(decreaseTime, 1000);
 const changeDifficulty = function (e) {
   const difficulty = e.target.value;
   localStorage.setItem('difficulty', difficulty);
+  location.reload();
 };
 
 const updateAddTime = function () {

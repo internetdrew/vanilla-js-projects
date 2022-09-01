@@ -57,3 +57,18 @@ const data = [
     text: 'I Want To Go To Grandmas',
   },
 ];
+
+const createBox = function (item) {
+  const { image, text } = item;
+
+  const box = `
+      <div class="box">
+        <img src="${image}" alt="${text}" />
+        <p class="info">${text}</p>
+      </div>
+`;
+
+  main.insertAdjacentHTML('beforeend', box);
+};
+
+data.forEach(createBox);

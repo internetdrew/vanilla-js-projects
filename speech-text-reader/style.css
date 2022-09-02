@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 * {
-  /* margin: 0;
-  padding: 0; */
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -75,4 +75,23 @@ textarea:focus {
   /* -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; */
+}
+
+.text-box textarea {
+  border: 0.1rem solid #dadada;
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  margin: 1.5rem 0;
+  width: 100%;
+  height: 15rem;
+}
+
+.text-box .close {
+  width: 100%;
+  /* float: right; */
+  text-align: right;
+}
+
+.text-box {
 }

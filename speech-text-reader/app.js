@@ -85,7 +85,6 @@ const getVoices = function () {
 const setMsgText = function (msg) {
   const message = new SpeechSynthesisUtterance();
   message.text = msg;
-  console.log(message);
   return message;
 };
 
@@ -97,6 +96,7 @@ const init = function () {
   data.forEach(createBox);
 };
 
+// Event listeners
 window.addEventListener('load', init);
 
 toggleBtn.addEventListener('click', () =>
@@ -107,27 +107,15 @@ closeBtn.addEventListener('click', () =>
   document.getElementById('text-box').classList.remove('show')
 );
 
-speechSynthesis.addEventListener('voiceschanged', getVoices);
-
 main.addEventListener('click', e => {
-  const boxes = document.querySelectorAll('.box');
-
-  boxes.forEach(box => {
+  if (e.target.parentElement.className === 'box') {
+    const box = e.target.parentElement;
     box.addEventListener('click', () => {
       const text = box.querySelector('.info').textContent;
       const msg = setMsgText(text);
       speakText(msg);
     });
-  });
-
-  // const boxEl = e.target.parentElement.className === 'box';
-
-  // if (boxEl) {
-  //   const text = boxEl.querySelector('.info').textContent;
-  //   const msg = setMsgText(text);
-  //   speakText(msg);
-
-  //   boxEl.classList.add('active');
-  //   setTimeout(() => boxEl.classList.remove('active'), 800);
-  // }
+  }
 });
+
+speechSynthesis.addEventListener('voiceschanged', getVoices);

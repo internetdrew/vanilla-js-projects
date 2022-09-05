@@ -75,12 +75,21 @@ const getVoices = function () {
   const voices = speechSynthesis.getVoices();
 
   voices.forEach(voice => {
-    console.log(voice.name);
     const voiceOption = `
      <option value="${voice.name}">${voice.name} ${voice.lang}</option>
     `;
     voicesSelect.insertAdjacentHTML('beforeend', voiceOption);
   });
+};
+
+const setMsgText = function (msg) {
+  const message = new SpeechSynthesisUtterance();
+  message.text = msg;
+  return message;
+};
+
+const speakText = function (msg) {
+  speechSynthesis.speak(msg);
 };
 
 const init = function () {
@@ -98,3 +107,23 @@ closeBtn.addEventListener('click', () =>
 );
 
 speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+main.addEventListener('click', e => {
+  if (e.target.parentElement.className === 'box') {
+    e.target.parentElement.addEventListener('click', () => {});
+  }
+  console.log('Here');
+  // const boxes = main.querySelectorAll('.box');
+  // if (!boxes) return;
+
+  // boxes.forEach(box =>
+  //   box.addEventListener('click', () => {
+  //     const text = box.querySelector('.info').textContent.toLowerCase();
+  //     const message = setMsgText(text);
+  //     speakText(message);
+
+  //     box.classList.add('active');
+  //     setTimeout(() => box.classList.remove('active'), 800);
+  //   })
+  // );
+});

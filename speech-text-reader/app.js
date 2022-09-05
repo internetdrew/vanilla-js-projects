@@ -82,9 +82,9 @@ const getVoices = function () {
   });
 };
 
-const setMsgText = function (msg) {
+const setMsgText = function (text) {
   const message = new SpeechSynthesisUtterance();
-  message.text = msg;
+  message.text = text;
   return message;
 };
 

@@ -71,6 +71,18 @@ const createBox = function (item) {
   main.insertAdjacentHTML('beforeend', box);
 };
 
+const getVoices = function () {
+  const voices = speechSynthesis.getVoices();
+
+  voices.forEach(voice => {
+    console.log(voice.name);
+    const voiceOption = `
+     <option value="${voice.name}">${voice.name} ${voice.lang}</option>
+    `;
+    voicesSelect.insertAdjacentHTML('beforeend', voiceOption);
+  });
+};
+
 const init = function () {
   data.forEach(createBox);
 };
@@ -84,3 +96,5 @@ toggleBtn.addEventListener('click', () =>
 closeBtn.addEventListener('click', () =>
   document.getElementById('text-box').classList.remove('show')
 );
+
+speechSynthesis.addEventListener('voiceschanged', getVoices);

@@ -71,4 +71,16 @@ const createBox = function (item) {
   main.insertAdjacentHTML('beforeend', box);
 };
 
-data.forEach(createBox);
+const init = function () {
+  data.forEach(createBox);
+};
+
+window.addEventListener('load', init);
+
+toggleBtn.addEventListener('click', () =>
+  document.getElementById('text-box').classList.toggle('show')
+);
+
+closeBtn.addEventListener('click', () =>
+  document.getElementById('text-box').classList.remove('show')
+);

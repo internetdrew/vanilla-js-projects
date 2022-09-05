@@ -110,11 +110,9 @@ closeBtn.addEventListener('click', () =>
 main.addEventListener('click', e => {
   if (e.target.parentElement.className === 'box') {
     const box = e.target.parentElement;
-    box.addEventListener('click', () => {
-      const text = box.querySelector('.info').textContent;
-      const msg = setMsgText(text);
-      speakText(msg);
-    });
+    const text = box.querySelector('.info').textContent;
+    const msg = setMsgText(text);
+    speakText(msg);
   }
 });
 

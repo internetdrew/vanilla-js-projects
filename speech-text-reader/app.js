@@ -7,6 +7,10 @@ const readBtn = document.getElementById('read');
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
 
+const app = {
+  message: new SpeechSynthesisUtterance(),
+};
+
 const data = [
   {
     image: './img/drink.jpg',
@@ -83,13 +87,11 @@ const getVoices = function () {
 };
 
 const setMsgText = function (text) {
-  const message = new SpeechSynthesisUtterance();
-  message.text = text;
-  return message;
+  app.message.text = text;
 };
 
-const speakText = function (msg) {
-  speechSynthesis.speak(msg);
+const speakText = function () {
+  speechSynthesis.speak(app.message);
 };
 
 const handleBoxClick = function (e) {
@@ -97,10 +99,14 @@ const handleBoxClick = function (e) {
 
   const box = e.target.parentElement;
   box.classList.add('active');
-  setTimeout(() => box.classList.remove('active'), 500);
+  setTimeout(() => box.classList.remove('active'), 800);
   const text = box.querySelector('.info').textContent;
   const msg = setMsgText(text);
   speakText(msg);
+};
+
+const setVoice = function (e) {
+  const msg = '';
 };
 
 const init = function () {
@@ -121,3 +127,4 @@ closeBtn.addEventListener('click', () =>
 main.addEventListener('click', handleBoxClick);
 
 speechSynthesis.addEventListener('voiceschanged', getVoices);
+voicesSelect.addEventListener('change', setVoice);

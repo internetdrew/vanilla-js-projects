@@ -93,14 +93,14 @@ const speakText = function (msg) {
 };
 
 const handleBoxClick = function (e) {
-  if (e.target.parentElement.className === 'box') {
-    const box = e.target.parentElement;
-    box.classList.add('active');
-    setTimeout(() => box.classList.remove('active'), 500);
-    const text = box.querySelector('.info').textContent;
-    const msg = setMsgText(text);
-    speakText(msg);
-  }
+  if (e.target.parentElement.className !== 'box') return;
+
+  const box = e.target.parentElement;
+  box.classList.add('active');
+  setTimeout(() => box.classList.remove('active'), 500);
+  const text = box.querySelector('.info').textContent;
+  const msg = setMsgText(text);
+  speakText(msg);
 };
 
 const init = function () {

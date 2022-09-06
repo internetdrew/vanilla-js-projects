@@ -9,7 +9,6 @@ const closeBtn = document.getElementById('close');
 
 const app = {
   message: new SpeechSynthesisUtterance(),
-  voice: '',
 };
 
 const data = [
@@ -78,6 +77,7 @@ const createBox = function (item) {
 
 const getVoices = function () {
   const voices = speechSynthesis.getVoices();
+  app.voices = voices;
 
   voices.forEach(voice => {
     const voiceOption = `
@@ -107,7 +107,7 @@ const handleBoxClick = function (e) {
 };
 
 const setVoice = function (e) {
-  app.voice = e.target.value;
+  app.message.voice = e.target.value;
 };
 
 const readUserMsg = function () {
@@ -117,7 +117,7 @@ const readUserMsg = function () {
 
 const init = function () {
   data.forEach(createBox);
-  app.voice = voicesSelect.value;
+  // app.message.voice = voicesSelect.value;
 };
 
 // Event listeners

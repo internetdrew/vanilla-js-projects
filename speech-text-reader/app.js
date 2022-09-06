@@ -92,6 +92,17 @@ const speakText = function (msg) {
   speechSynthesis.speak(msg);
 };
 
+const handleBoxClick = function (e) {
+  if (e.target.parentElement.className === 'box') {
+    const box = e.target.parentElement;
+    box.classList.add('active');
+    setTimeout(() => box.classList.remove('active'), 500);
+    const text = box.querySelector('.info').textContent;
+    const msg = setMsgText(text);
+    speakText(msg);
+  }
+};
+
 const init = function () {
   data.forEach(createBox);
 };
@@ -107,13 +118,6 @@ closeBtn.addEventListener('click', () =>
   document.getElementById('text-box').classList.remove('show')
 );
 
-main.addEventListener('click', e => {
-  if (e.target.parentElement.className === 'box') {
-    const box = e.target.parentElement;
-    const text = box.querySelector('.info').textContent;
-    const msg = setMsgText(text);
-    speakText(msg);
-  }
-});
+main.addEventListener('click', handleBoxClick);
 
 speechSynthesis.addEventListener('voiceschanged', getVoices);

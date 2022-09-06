@@ -108,7 +108,6 @@ const handleBoxClick = function (e) {
 
 const setVoice = function (e) {
   app.voice = e.target.value;
-  const msg = '';
 };
 
 const init = function () {
@@ -131,3 +130,4 @@ main.addEventListener('click', handleBoxClick);
 
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 voicesSelect.addEventListener('change', setVoice);
+readBtn.addEventListener('click', readUserMsg);

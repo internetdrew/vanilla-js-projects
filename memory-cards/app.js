@@ -53,13 +53,18 @@ const createCards = function () {
   app.cardsData.forEach((data, index) => createCard(data, index));
 };
 
-const toggleShowAnswer = function (e) {
+const toggleShowAnswer = function () {
   app.cardEls.forEach(cardEl => cardEl.classList.toggle('show-answer'));
+};
+
+const updateCurrentText = function () {
+  currentEl.textContent = `${app.currentActiveCard + 1}/${app.cardEls.length}`;
 };
 
 const init = function () {
   createCards();
   pushCardsToCardEls();
+  updateCurrentText();
 };
 
 window.addEventListener('load', init);

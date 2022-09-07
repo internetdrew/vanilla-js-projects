@@ -142,3 +142,63 @@ span i {
   font-size: 1.6rem;
   color: #ddd;
 }
+
+.navigation {
+  display: flex;
+  margin: 2rem 0;
+}
+
+.navigation .nav-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.navigation p {
+  margin: 0 2.5rem;
+}
+
+.add-container {
+  opacity: 0;
+  z-index: -1;
+  background-color: #f0f0f0;
+  border-top: 0.2rem solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.add-container.show {
+  opacity: 1;
+  z-index: 2;
+}
+
+.add-container h2 {
+  margin: 1rem 0;
+}
+
+.form-group label {
+  display: block;
+  margin: 2rem 0 1rem;
+}
+
+.form-group textarea {
+  border: 0.1rem solid #aaa;
+  border-radius: 0.3rem;
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  min-width: 50rem;
+  max-width: 100%;
+  resize: none;
+}
+
+.form-group textarea:focus {
+  outline: 0;
+}

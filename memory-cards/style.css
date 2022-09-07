@@ -90,16 +90,27 @@ span i {
   transform: translateX(0) rotateY(0deg);
 }
 
+.card.left {
+  transform: translateX(-50%) rotateY(10deg);
+}
+
 .inner-card {
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.3);
   border-radius: 0.4rem;
   height: 100%;
   width: 100%;
   position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.card.show-answer .inner-card {
+  transform: rotateX(180deg);
 }
 
 .inner-card-front,
 .inner-card-back {
+  backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -109,4 +120,25 @@ span i {
   height: 100%;
   width: 100%;
   background: #fff;
+}
+
+.inner-card-front {
+  transform: rotateX(0deg);
+  z-index: 2;
+}
+
+.inner-card-back {
+  transform: rotateX(180deg);
+}
+
+.inner-card-front::after,
+.inner-card-back::after {
+  content: '\f021  Flip';
+  font-family: 'Font Awesome 5 Free', Lato, sans-serif;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #ddd;
 }

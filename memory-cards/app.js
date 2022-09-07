@@ -28,7 +28,7 @@ const app = {
       answer: 'thisIsAVariable',
     },
   ],
-  cardsEl: [],
+  cardEls: [],
 };
 
 const createCard = function (data, index) {
@@ -44,18 +44,23 @@ const createCard = function (data, index) {
   cardsContainer.insertAdjacentHTML('beforeend', card);
 };
 
-const pushCardsToCardsEl = function () {
+const pushCardsToCardEls = function () {
   const cards = cardsContainer.querySelectorAll('.card');
-  cards.forEach(card => app.cardsEl.push(card));
+  cards.forEach(card => app.cardEls.push(card));
 };
 
 const createCards = function () {
   app.cardsData.forEach((data, index) => createCard(data, index));
 };
 
+const toggleShowAnswer = function (e) {
+  app.cardEls.forEach(cardEl => cardEl.classList.toggle('show-answer'));
+};
+
 const init = function () {
   createCards();
-  pushCardsToCardsEl();
+  pushCardsToCardEls();
 };
 
 window.addEventListener('load', init);
+cardsContainer.addEventListener('click', toggleShowAnswer);

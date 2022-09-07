@@ -53,6 +53,6 @@ h2 button {
   background-color: transparent;
 }
 
-.btn i {
-  text-transform: lowercase;
+span i {
+  margin-right: 0.5rem;
 }

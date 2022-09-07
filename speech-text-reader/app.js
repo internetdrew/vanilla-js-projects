@@ -107,7 +107,7 @@ const handleBoxClick = function (e) {
 };
 
 const setVoice = function (e) {
-  app.message.voice = e.target.value;
+  app.message.voice = app.voices.find(voice => voice.name === e.target.value);
 };
 
 const readUserMsg = function () {
@@ -117,7 +117,9 @@ const readUserMsg = function () {
 
 const init = function () {
   data.forEach(createBox);
-  // app.message.voice = voicesSelect.value;
+  app.message.voice = app.voices.find(
+    voice => voice.name === voicesSelect.value
+  );
 };
 
 // Event listeners

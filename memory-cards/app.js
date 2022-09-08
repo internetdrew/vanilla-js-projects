@@ -127,6 +127,11 @@ const sendCardstoLocal = function (cards) {
   localStorage.setItem('cards', JSON.stringify(cards));
 };
 
+const clearAllCards = function () {
+  localStorage.removeItem('cards');
+  window.location.reload();
+};
+
 const init = function () {
   setCardData();
   if (app.cardsData.length === 0) return;
@@ -141,3 +146,4 @@ nav.addEventListener('click', handleNavigation);
 showBtn.addEventListener('click', () => addContainer.classList.add('show'));
 hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));
 addCardBtn.addEventListener('click', addNewCard);
+clearBtn.addEventListener('click', clearAllCards);

@@ -18,6 +18,10 @@ const getCardsData = function () {
   return cards === null ? [] : cards;
 };
 
+const setCardData = function () {
+  app.cardsData = getCardsData();
+};
+
 const app = {
   currentActiveCard: 0,
   cardsData: [],
@@ -97,7 +101,7 @@ const handleNavigation = function (e) {
 const storeCard = function (card) {
   const tempCardArr = getCardsData();
   tempCardArr.push(card);
-  setCardsData(tempCardArr);
+  sendCardstoLocal(tempCardArr);
 };
 
 const addNewCard = function () {
@@ -113,22 +117,18 @@ const addNewCard = function () {
 
   questionEl.value = '';
   answerEl.value = '';
+  addContainer.classList.remove('show');
 
   storeCard(card);
-  app.cardsData = getCardsData();
-
-  createCards();
-  pushCardsToCardEls();
-  updateCurrentText();
-  addContainer.classList.remove('show');
+  init();
 };
 
-const setCardsData = function (cards) {
+const sendCardstoLocal = function (cards) {
   localStorage.setItem('cards', JSON.stringify(cards));
 };
 
 const init = function () {
-  app.cardsData = getCardsData();
+  setCardData();
   if (app.cardsData.length === 0) return;
   createCards();
   pushCardsToCardEls();

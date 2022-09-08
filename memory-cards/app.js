@@ -102,9 +102,14 @@ const handleNavigation = function (e) {
 };
 
 const addNewCard = function () {
+  const question = questionEl.value;
+  const answer = answerEl.value;
+
+  if (!question.trim() || !answer.trim()) return;
+
   const card = {
-    question: questionEl.value,
-    answer: answerEl.value,
+    question: question,
+    answer: answer,
   };
 
   app.cardsData.push(card);
@@ -112,6 +117,11 @@ const addNewCard = function () {
   pushCardsToCardEls();
   updateCurrentText();
   addContainer.classList.remove('show');
+};
+
+const getCardsData = function () {
+  const cards = JSON.parse(localStorage.getItem('cards'));
+  return cards === null ? [] : cards;
 };
 
 const init = function () {

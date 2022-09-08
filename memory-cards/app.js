@@ -32,6 +32,12 @@ const app = {
   cardEls: [],
 };
 
+const clearChildEls = function (parentEl) {
+  while (parentEl.firstChild) {
+    parentEl.removeChild(parentEl.firstChild);
+  }
+};
+
 const createCard = function (data, index) {
   const card = `
       <div class="${index === 0 ? 'card active' : 'card'}">
@@ -46,11 +52,12 @@ const createCard = function (data, index) {
 };
 
 const pushCardsToCardEls = function () {
-  const cards = cardsContainer.querySelectorAll('.card');
-  cards.forEach(card => app.cardEls.push(card));
+  const cards = document.querySelectorAll('.card');
+  app.cardEls = cards;
 };
 
 const createCards = function () {
+  clearChildEls(cardsContainer);
   app.cardsData.forEach((data, index) => createCard(data, index));
 };
 
@@ -94,6 +101,19 @@ const handleNavigation = function (e) {
   updateCurrentText();
 };
 
+const addNewCard = function () {
+  const card = {
+    question: questionEl.value,
+    answer: answerEl.value,
+  };
+
+  app.cardsData.push(card);
+  createCards();
+  addContainer.classList.remove('show');
+  pushCardsToCardEls();
+  updateCurrentText();
+};
+
 const init = function () {
   createCards();
   pushCardsToCardEls();
@@ -102,7 +122,7 @@ const init = function () {
 
 window.addEventListener('load', init);
 cardsContainer.addEventListener('click', toggleShowAnswer);
-
 nav.addEventListener('click', handleNavigation);
 showBtn.addEventListener('click', () => addContainer.classList.add('show'));
 hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));
+addCardBtn.addEventListener('click', addNewCard);

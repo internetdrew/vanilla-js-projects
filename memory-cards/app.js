@@ -109,9 +109,9 @@ const addNewCard = function () {
 
   app.cardsData.push(card);
   createCards();
-  addContainer.classList.remove('show');
   pushCardsToCardEls();
   updateCurrentText();
+  addContainer.classList.remove('show');
 };
 
 const init = function () {

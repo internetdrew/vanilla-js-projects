@@ -26,7 +26,6 @@ const app = {
   currentActiveCard: 0,
   cardsData: [],
   cardEls: [],
-  cards: [],
 };
 
 const clearChildEls = function (parentEl) {

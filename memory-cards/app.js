@@ -104,3 +104,5 @@ window.addEventListener('load', init);
 cardsContainer.addEventListener('click', toggleShowAnswer);
 
 nav.addEventListener('click', handleNavigation);
+showBtn.addEventListener('click', () => addContainer.classList.add('show'));
+hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));

@@ -62,6 +62,38 @@ const updateCurrentText = function () {
   currentEl.textContent = `${app.currentActiveCard + 1}/${app.cardEls.length}`;
 };
 
+const goToNextPage = function () {
+  app.cardEls[app.currentActiveCard].className = 'card left';
+  app.currentActiveCard++;
+
+  if (app.currentActiveCard > app.cardEls.length - 1) {
+    app.currentActiveCard = app.cardEls.length - 1;
+    return;
+  }
+};
+
+const goToPrevPage = function () {
+  app.cardEls[app.currentActiveCard].className = 'card right';
+  app.currentActiveCard--;
+
+  if (app.currentActiveCard < 0) {
+    app.currentActiveCard = 0;
+    return;
+  }
+};
+
+const handleNavigation = function (e) {
+  const button = e.composedPath().find(el => el.nodeName === 'BUTTON');
+  if (!button) return;
+
+  if (button.id === 'next') goToNextPage();
+
+  if (button.id === 'prev') goToPrevPage();
+
+  app.cardEls[app.currentActiveCard].className = 'card active';
+  updateCurrentText();
+};
+
 const init = function () {
   createCards();
   pushCardsToCardEls();
@@ -70,30 +102,5 @@ const init = function () {
 
 window.addEventListener('load', init);
 cardsContainer.addEventListener('click', toggleShowAnswer);
-nextBtn.addEventListener('click', e => {
-  app.cardEls[app.currentActiveCard].className = 'card left';
-  app.currentActiveCard++;
 
-  if (app.currentActiveCard > app.cardEls.length - 1) {
-    app.cardEls[0].className = 'card active';
-    app.currentActiveCard = 0;
-    updateCurrentText();
-    return;
-  }
-
-  app.cardEls[app.currentActiveCard].className = 'card active';
-  updateCurrentText();
-});
-
-nav.addEventListener('click', e => {
-  const button = e.composedPath().find(el => el.nodeName === 'BUTTON');
-
-  if (!button) return;
-  console.log(button);
-
-  if (button.id === 'next') {
-  }
-
-  if (button.id === 'prev') {
-  }
-});
+nav.addEventListener('click', handleNavigation);

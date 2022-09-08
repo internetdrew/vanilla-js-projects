@@ -13,23 +13,16 @@ const clearBtn = document.getElementById('clear');
 const addContainer = document.getElementById('add-container');
 const nav = document.querySelector('.navigation');
 
+const getCardsData = function () {
+  const cards = JSON.parse(localStorage.getItem('cards'));
+  return cards === null ? [] : cards;
+};
+
 const app = {
   currentActiveCard: 0,
-  cardsData: [
-    {
-      question: 'What must a variable begin with?',
-      answer: 'A letter, $, or _',
-    },
-    {
-      question: 'What is a variable?',
-      answer: 'Container for a piece of data',
-    },
-    {
-      question: 'Example of a case sensitive variable',
-      answer: 'thisIsAVariable',
-    },
-  ],
+  cardsData: [],
   cardEls: [],
+  cards: [],
 };
 
 const clearChildEls = function (parentEl) {
@@ -101,6 +94,12 @@ const handleNavigation = function (e) {
   updateCurrentText();
 };
 
+const storeCard = function (card) {
+  const tempCardArr = getCardsData();
+  tempCardArr.push(card);
+  setCardsData(tempCardArr);
+};
+
 const addNewCard = function () {
   const question = questionEl.value;
   const answer = answerEl.value;
@@ -108,23 +107,28 @@ const addNewCard = function () {
   if (!question.trim() || !answer.trim()) return;
 
   const card = {
-    question: question,
-    answer: answer,
+    question,
+    answer,
   };
 
-  app.cardsData.push(card);
+  questionEl.value = '';
+  answerEl.value = '';
+
+  storeCard(card);
+  app.cardsData = getCardsData();
+
   createCards();
   pushCardsToCardEls();
   updateCurrentText();
   addContainer.classList.remove('show');
 };
 
-const getCardsData = function () {
-  const cards = JSON.parse(localStorage.getItem('cards'));
-  return cards === null ? [] : cards;
+const setCardsData = function (cards) {
+  localStorage.setItem('cards', JSON.stringify(cards));
 };
 
 const init = function () {
+  if (app.cardsData.length === 0) return;
   createCards();
   pushCardsToCardEls();
   updateCurrentText();

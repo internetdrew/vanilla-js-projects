@@ -128,6 +128,7 @@ const setCardsData = function (cards) {
 };
 
 const init = function () {
+  app.cardsData = getCardsData();
   if (app.cardsData.length === 0) return;
   createCards();
   pushCardsToCardEls();

@@ -19,7 +19,7 @@ const showResultsMsg = function (msg) {
   message.textContent = msg;
 };
 
-const fetchSongsData = async function (term) {
+const fetchSongsMatching = async function (term) {
   const res = await fetch(`${apiURL}/suggest/${term}`);
   if (!res.ok) throw new Error('Trouble getting response from API');
 
@@ -51,10 +51,10 @@ const handleSearch = async function (e) {
 
   if (!searchTerm) return;
 
-  const results = await fetchSongsData(searchTerm);
+  const results = await fetchSongsMatching(searchTerm);
   showResultsMsg(
     `${
-      results.data.length === 0
+      results.total === 0
         ? `There are no search results matching "${searchTerm}".`
         : `Showing ${results.data.length} of ${results.total} results for "${searchTerm}"`
     }`

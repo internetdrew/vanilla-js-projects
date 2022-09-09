@@ -7,9 +7,16 @@ const more = document.getElementById('more');
 
 const apiURL = 'https://api.lyrics.ovh';
 
-const searchSongs = async function (searchTerm) {
-  const res = await fetch(`${apiURL}/suggest/${searchTerm}`);
-  console.log(res);
+const fetchSongsData = async function (term) {
+  const res = await fetch(`${apiURL}/suggest/${term}`);
+  if (!res.ok) throw new Error('Trouble getting response from API');
+
+  const data = await res.json();
+  return data;
+};
+
+const showSongsData = function (data) {
+  console.log(data);
 };
 
 const init = function () {
@@ -23,6 +30,6 @@ form.addEventListener('submit', e => {
   const searchTerm = search.value.trim();
 
   if (!searchTerm) alert('Please type in a search term.');
-  console.log(searchTerm);
-  searchSongs(searchTerm);
+  const songsData = fetchSongsData(searchTerm);
+  showSongsData(songsData);
 });

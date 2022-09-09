@@ -9,6 +9,12 @@ const songsList = document.getElementById('songs');
 
 const apiURL = 'https://api.lyrics.ovh';
 
+const clearElsFrom = function (parentEl) {
+  while (parentEl.firstChild) {
+    parentEl.removeChild(parentEl.firstChild);
+  }
+};
+
 const showResultsMsg = function (msg) {
   message.textContent = msg;
 };
@@ -38,10 +44,6 @@ const showSongsInfo = function (data) {
   });
 };
 
-const init = function () {
-  search.focus();
-};
-
 const handleSearch = async function (e) {
   e.preventDefault();
   const searchTerm = search.value.trim();
@@ -54,6 +56,10 @@ const handleSearch = async function (e) {
     `Showing ${results.data.length} of ${results.total} results for "${searchTerm}":`
   );
   showSongsInfo(results);
+};
+
+const init = function () {
+  search.focus();
 };
 
 window.addEventListener('load', init);

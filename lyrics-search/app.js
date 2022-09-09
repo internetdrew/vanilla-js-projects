@@ -34,10 +34,10 @@ const showSongsInfo = function (data) {
 
   songsData.forEach(song => {
     const html = `
-  <li>
-  <span><strong>${song.title}</strong> — ${song.artist.name}</span>
-  <button class="btn">Get Lyrics</button>
-  </li>
+          <li>
+            <span><strong>${song.title}</strong> — ${song.artist.name}</span>
+            <button class="btn">Get Lyrics</button>
+          </li>
   `;
 
     songsList.insertAdjacentHTML('beforeend', html);
@@ -53,8 +53,13 @@ const handleSearch = async function (e) {
 
   const results = await fetchSongsData(searchTerm);
   showResultsMsg(
-    `Showing ${results.data.length} of ${results.total} results for "${searchTerm}":`
+    `${
+      results.data.length === 0
+        ? `There are no search results matching "${searchTerm}".`
+        : `Showing ${results.data.length} of ${results.total} results for "${searchTerm}"`
+    }`
   );
+  clearElsFrom(songsList);
   showSongsInfo(results);
 };
 

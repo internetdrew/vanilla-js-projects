@@ -106,7 +106,7 @@ window.addEventListener('load', init);
 
 form.addEventListener('submit', handleSearch);
 
-more.addEventListener('click', e => {
-  const btn = e.composedPath().find(el => el.classList.contains('btn'));
-  if (btn) getMoreSongs(`${btn.dataset.direction}`);
+more.addEventListener('click', () => {
+  const buttons = more.querySelectorAll('.btn');
+  buttons.forEach(btn => getMoreSongs(btn.dataset.direction));
 });

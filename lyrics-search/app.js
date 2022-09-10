@@ -21,16 +21,15 @@ const getQueryFrom = function (results) {
 
 const findIndexes = function (results) {
   const indexes = {
-    start: '',
+    start: 1,
     end: +results.next.split('index=')[1],
   };
 
-  if (!results.prev) {
-    indexes.start = 1;
+  if (results.prev && results.next) {
+    indexes.start = indexes.end - results.data.length;
   }
 
-  if (results.prev && results.next) {
-  }
+  return indexes;
 };
 
 const showResultsMsg = function (results) {

@@ -45,8 +45,8 @@ const showSongsInfo = function (data) {
     })
     .join('');
 
+  clearElsFrom(more);
   if (data.prev || data.next) {
-    clearElsFrom(more);
     const buttons = `
     ${
       data.prev
@@ -68,7 +68,7 @@ const getMoreSongs = async function (url) {
   try {
     const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
 
-    if (!res.ok) throw new Error(`Trouble getting response`);
+    if (!res.ok) throw new Error(res);
     const data = await res.json();
 
     showSongsInfo(data);
@@ -98,9 +98,15 @@ const handleSearch = async function (e) {
   showSongsInfo(results);
 };
 
-const handleNavigation = function () {
+const handleNavigation = function (e) {
   const buttons = more.querySelectorAll('.btn');
-  buttons.forEach(btn => getMoreSongs(btn.dataset.direction));
+  buttons.forEach(button => getMoreSongs(button.dataset.direction));
+
+  if (button.textContent.toLowerCase() === 'prev') {
+  }
+
+  if (button.textContent.toLowerCase() === 'next') {
+  }
 };
 
 const init = function () {

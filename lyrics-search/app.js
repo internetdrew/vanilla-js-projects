@@ -99,14 +99,11 @@ const handleSearch = async function (e) {
 };
 
 const handleNavigation = function (e) {
+  const aButton = e.target.classList.contains('btn');
+  if (!aButton) return;
+
   const buttons = more.querySelectorAll('.btn');
   buttons.forEach(button => getMoreSongs(button.dataset.direction));
-
-  if (button.textContent.toLowerCase() === 'prev') {
-  }
-
-  if (button.textContent.toLowerCase() === 'next') {
-  }
 };
 
 const init = function () {

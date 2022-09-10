@@ -15,7 +15,34 @@ const clearElsFrom = function (parentEl) {
   }
 };
 
-const showResultsMsg = function (data) {};
+const getQueryFrom = function (results) {
+  return results.next.split('q=')[1].split('&')[0];
+};
+
+const findIndexes = function (results) {
+  const indexes = {
+    start: '',
+    end: +results.next.split('index=')[1],
+  };
+
+  if (!results.prev) {
+    indexes.start = 1;
+  }
+
+  if (results.prev && results.next) {
+  }
+};
+
+const showResultsMsg = function (results) {
+  console.log(results);
+  if (results.total === 0)
+    return (message.textContent = `Sorry. No matching results. Try another name!`);
+
+  const query = getQueryFrom(results);
+  const { start, end } = findIndexes(results);
+
+  message.textContent = `Showing results ${start} — ${end} for "${query}":`;
+};
 
 const showNavButtons = function (data) {
   if (data.prev || data.next) {
@@ -73,6 +100,7 @@ const getMoreSongs = async function (url) {
     const data = await res.json();
 
     showSongsInfo(data);
+    showResultsMsg(data);
   } catch (error) {
     console.log(error);
   }
@@ -86,7 +114,6 @@ const handleSearch = async function (e) {
   if (!searchTerm) return;
 
   const results = await fetchSongsMatching(searchTerm);
-  console.log(results);
 
   showResultsMsg(results);
 

@@ -98,6 +98,11 @@ const handleSearch = async function (e) {
   showSongsInfo(results);
 };
 
+const handleNavigation = function () {
+  const buttons = more.querySelectorAll('.btn');
+  buttons.forEach(btn => getMoreSongs(btn.dataset.direction));
+};
+
 const init = function () {
   search.focus();
 };
@@ -106,7 +111,4 @@ window.addEventListener('load', init);
 
 form.addEventListener('submit', handleSearch);
 
-more.addEventListener('click', () => {
-  const buttons = more.querySelectorAll('.btn');
-  buttons.forEach(btn => getMoreSongs(btn.dataset.direction));
-});
+more.addEventListener('click', handleNavigation);

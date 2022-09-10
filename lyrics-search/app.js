@@ -24,6 +24,7 @@ const fetchSongsMatching = async function (term) {
   if (!res.ok) throw new Error('Trouble getting response from API');
 
   const data = await res.json();
+  console.log(data);
   return data;
 };
 
@@ -45,17 +46,36 @@ const showSongsInfo = function (data) {
 
   if (data.prev || data.next) {
     const buttons = `
-    ${data.prev ? `<button class="btn">Prev</button>` : ''}
-    ${data.next ? `<button class="btn">Next</button>` : ''}
+    ${
+      data.prev
+        ? `<button class="btn" data-direction="${data.prev}">Prev</button>`
+        : ''
+    }
+    ${
+      data.next
+        ? `<button class="btn" data-direction="${data.next}">Next</button>`
+        : ''
+    }
 `;
 
     more.insertAdjacentHTML('beforeend', buttons);
   }
 };
 
+const getMoreSongs = async function (url) {
+  try {
+    console.log(url);
+    const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
+    const data = await res.json();
+
+    showSongsInfo(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const handleSearch = async function (e) {
   e.preventDefault();
-  console.log(this);
   const searchTerm = search.value.trim();
   search.value = '';
 
@@ -82,3 +102,9 @@ const init = function () {
 window.addEventListener('load', init);
 
 form.addEventListener('submit', handleSearch);
+
+more.addEventListener('click', e => {
+  const btn = e.composedPath().find(el => el.classList.contains('btn'));
+
+  if (btn) getMoreSongs(`${btn.dataset.direction}`);
+});

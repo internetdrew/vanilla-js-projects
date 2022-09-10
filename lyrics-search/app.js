@@ -15,37 +15,9 @@ const clearElsFrom = function (parentEl) {
   }
 };
 
-const showResultsMsg = function (msg) {
-  message.textContent = msg;
-};
+const showResultsMsg = function (data) {};
 
-const fetchSongsMatching = async function (term) {
-  const res = await fetch(`${apiURL}/suggest/${term}`);
-  if (!res.ok) throw new Error('Trouble getting response from API');
-
-  const data = await res.json();
-  return data;
-};
-
-const showSongsInfo = function (data) {
-  clearElsFrom(songsList);
-  const songsData = data.data;
-  console.log(data);
-
-  songsData
-    .map(song => {
-      const html = `
-          <li>
-            <span><strong>${song.title}</strong> — ${song.artist.name}</span>
-            <button class="btn" data-artist="${song.artist.name}" data-song-title="${song.title}">Get Lyrics</button>
-          </li>
-  `;
-
-      songsList.insertAdjacentHTML('beforeend', html);
-    })
-    .join('');
-
-  clearElsFrom(more);
+const showNavButtons = function (data) {
   if (data.prev || data.next) {
     const buttons = `
     ${
@@ -62,6 +34,35 @@ const showSongsInfo = function (data) {
 
     more.insertAdjacentHTML('beforeend', buttons);
   }
+};
+
+const fetchSongsMatching = async function (term) {
+  const res = await fetch(`${apiURL}/suggest/${term}`);
+  if (!res.ok) throw new Error('Trouble getting response from API');
+
+  const data = await res.json();
+  return data;
+};
+
+const showSongsInfo = function (data) {
+  clearElsFrom(songsList);
+  const songsData = data.data;
+
+  songsData
+    .map(song => {
+      const html = `
+          <li>
+            <span><strong>${song.title}</strong> — ${song.artist.name}</span>
+            <button class="btn" data-artist="${song.artist.name}" data-song-title="${song.title}">Get Lyrics</button>
+          </li>
+  `;
+
+      songsList.insertAdjacentHTML('beforeend', html);
+    })
+    .join('');
+
+  clearElsFrom(more);
+  showNavButtons(data);
 };
 
 const getMoreSongs = async function (url) {
@@ -85,25 +86,27 @@ const handleSearch = async function (e) {
   if (!searchTerm) return;
 
   const results = await fetchSongsMatching(searchTerm);
+  console.log(results);
 
-  showResultsMsg(
-    `${
-      results.total === 0
-        ? `There are no search results matching "${searchTerm}".`
-        : `Showing ${results.data.length} of ${results.total} results for "${searchTerm}"`
-    }`
-  );
+  showResultsMsg(results);
 
   clearElsFrom(songsList);
   showSongsInfo(results);
 };
 
 const handleNavigation = function (e) {
-  const aButton = e.target.classList.contains('btn');
-  if (!aButton) return;
+  if (!e.target.classList.contains('btn')) return;
 
   const buttons = more.querySelectorAll('.btn');
-  buttons.forEach(button => getMoreSongs(button.dataset.direction));
+  buttons.forEach(button => {
+    getMoreSongs(button.dataset.direction);
+
+    if (button.textContent.toLowerCase === 'prev') {
+    }
+
+    if (button.textContent.toLowerCase() === 'next') {
+    }
+  });
 };
 
 const init = function () {

@@ -19,27 +19,23 @@ const getQueryFrom = function (results) {
   return results.next.split('q=')[1].split('&')[0];
 };
 
-const findIndexes = function (results) {
+const getResultsIndexes = function (results) {
   const indexes = {
-    start: +`${results.prev ? results.prev.split('index=')[1] : 1}`,
+    start: +`${
+      results.prev ? +results.next.split('index=')[1] - results.data.length : 1
+    }`,
     end: +results.next.split('index=')[1],
   };
-  console.log(indexes);
-
-  if (results.prev && results.next) {
-    indexes.start = indexes.end - results.data.length;
-  }
 
   return indexes;
 };
 
 const showResultsMsg = function (results) {
-  console.log(results);
   if (results.total === 0)
     return (message.textContent = `Sorry. No matching results. Try another name!`);
 
   const query = getQueryFrom(results);
-  const { start, end } = findIndexes(results);
+  const { start, end } = getResultsIndexes(results);
 
   message.textContent = `Showing results ${start} — ${end} for "${query}":`;
 };
@@ -94,9 +90,10 @@ const showSongsInfo = function (data) {
 
 const getMoreSongs = async function (url) {
   try {
+    console.log(url);
     const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
 
-    if (!res.ok) throw new Error(res);
+    if (!res.ok) throw new Error('Trouble getting more songs');
     const data = await res.json();
 
     showSongsInfo(data);
@@ -122,18 +119,9 @@ const handleSearch = async function (e) {
 };
 
 const handleNavigation = function (e) {
-  if (!e.target.classList.contains('btn')) return;
-
-  const buttons = more.querySelectorAll('.btn');
-  buttons.forEach(button => {
-    getMoreSongs(button.dataset.direction);
-
-    if (button.textContent.toLowerCase === 'prev') {
-    }
-
-    if (button.textContent.toLowerCase() === 'next') {
-    }
-  });
+  if (e.target.classList.contains('btn')) {
+    getMoreSongs(e.target.dataset.direction);
+  }
 };
 
 const init = function () {

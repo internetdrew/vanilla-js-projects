@@ -21,9 +21,10 @@ const getQueryFrom = function (results) {
 
 const findIndexes = function (results) {
   const indexes = {
-    start: 1,
+    start: +`${results.prev ? results.prev.split('index=')[1] : 1}`,
     end: +results.next.split('index=')[1],
   };
+  console.log(indexes);
 
   if (results.prev && results.next) {
     indexes.start = indexes.end - results.data.length;

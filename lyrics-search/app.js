@@ -24,12 +24,13 @@ const fetchSongsMatching = async function (term) {
   if (!res.ok) throw new Error('Trouble getting response from API');
 
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
 const showSongsInfo = function (data) {
+  clearElsFrom(songsList);
   const songsData = data.data;
+  console.log(data);
 
   songsData
     .map(song => {
@@ -45,6 +46,7 @@ const showSongsInfo = function (data) {
     .join('');
 
   if (data.prev || data.next) {
+    clearElsFrom(more);
     const buttons = `
     ${
       data.prev
@@ -64,8 +66,9 @@ const showSongsInfo = function (data) {
 
 const getMoreSongs = async function (url) {
   try {
-    console.log(url);
     const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
+
+    if (!res.ok) throw new Error(`Trouble getting response`);
     const data = await res.json();
 
     showSongsInfo(data);
@@ -105,6 +108,5 @@ form.addEventListener('submit', handleSearch);
 
 more.addEventListener('click', e => {
   const btn = e.composedPath().find(el => el.classList.contains('btn'));
-
   if (btn) getMoreSongs(`${btn.dataset.direction}`);
 });

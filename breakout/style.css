@@ -66,4 +66,10 @@ canvas {
   width: 40rem;
   padding: 2rem;
   line-height: 1.5;
+  transform: translateX(-40rem);
+  transition: transform 1s ease-in-out;
+}
+
+.rules.show {
+  transform: translateX(0);
 }

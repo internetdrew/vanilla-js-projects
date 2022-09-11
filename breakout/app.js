@@ -58,17 +58,17 @@ const brickInfo = {
 };
 
 const fillBrickRows = function (rows, colIndex) {
-  return rows.map((row, index) => {
+  return rows.map((row, rowIndex) => {
     const x =
       colIndex * (brickInfo.width + brickInfo.padding) + brickInfo.offsetX;
     const y =
-      index * (brickInfo.height + brickInfo.padding) + brickInfo.offsetY;
+      rowIndex * (brickInfo.height + brickInfo.padding) + brickInfo.offsetY;
 
     return { x, y, ...brickInfo };
   });
 };
 
-const addBricksToCols = function () {
+const getBricksData = function () {
   const brickRows = new Array(game.brickRowCount).fill({});
   const brickColumns = new Array(game.brickColumnCount).fill([]);
 
@@ -88,7 +88,7 @@ const drawBrick = function (brick) {
 };
 
 const drawBricks = function () {
-  const bricks = addBricksToCols();
+  const bricks = getBricksData();
   bricks.forEach(column => {
     column.forEach(brick => drawBrick(brick));
   });

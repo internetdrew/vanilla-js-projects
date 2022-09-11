@@ -24,6 +24,8 @@ closeBtn.addEventListener('click', () => rules.classList.remove('show'));
 
 const game = {
   score: 0,
+  brickRowCount: 5,
+  brickColumnCount: 9,
 };
 
 // Ball props
@@ -45,6 +47,31 @@ const paddle = {
   speed: 8,
   dx: 0,
 };
+
+const brickInfo = {
+  width: 70,
+  height: 20,
+  padding: 10,
+  offsetX: 45,
+  offsetY: 60,
+  visible: true,
+};
+
+const createBricks = function () {
+  const bricksRows = new Array(game.brickRowCount).fill([]);
+  const brickColumns = new Array(game.brickColumnCount).fill({});
+
+  const bricks = bricksRows.map((row, index) => {
+    const x = index * (brickInfo.width + brickInfo.padding) + brickInfo.offsetX;
+    const y =
+      index * (brickInfo.height + brickInfo.padding) + brickInfo.offsetY;
+    return { x, y, ...brickInfo };
+  });
+
+  return bricks;
+};
+
+const drawBricks = function () {};
 
 const drawBall = function () {
   ctx.beginPath();
@@ -71,6 +98,7 @@ const draw = function () {
   drawBall();
   drawPaddle();
   drawScore();
+  drawBricks();
 };
 
 window.addEventListener('load', draw);

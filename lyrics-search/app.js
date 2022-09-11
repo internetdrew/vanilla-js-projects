@@ -125,6 +125,14 @@ const handleNavigation = function (e) {
 
 const getLyrics = async function (artist, songTitle) {
   try {
+    const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+    if (!res.ok) {
+      console.log(res);
+      throw new Error('Trouble getting lyrics');
+    }
+
+    const data = await res.json();
+    console.log(data);
   } catch (e) {
     console.log(e);
   }

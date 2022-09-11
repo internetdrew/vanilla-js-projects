@@ -57,9 +57,10 @@ const brickInfo = {
   visible: true,
 };
 
-const fillBrickRows = function (rows) {
+const fillBrickRows = function (rows, colIndex) {
   return rows.map((row, index) => {
-    const x = index * (brickInfo.width + brickInfo.padding) + brickInfo.offsetX;
+    const x =
+      colIndex * (brickInfo.width + brickInfo.padding) + brickInfo.offsetX;
     const y =
       index * (brickInfo.height + brickInfo.padding) + brickInfo.offsetY;
 
@@ -72,7 +73,7 @@ const createBricks = function () {
   const brickColumns = new Array(game.brickColumnCount).fill([]);
 
   const brickRowsInColumns = brickColumns.map((column, index) =>
-    fillBrickRows(brickRows)
+    fillBrickRows(brickRows, index)
   );
 
   return brickRowsInColumns;
@@ -80,7 +81,16 @@ const createBricks = function () {
 
 const drawBricks = function () {
   const bricks = createBricks();
-  console.log(bricks);
+
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      ctx.beginPath();
+      ctx.rect(brick.x, brick.y, brick.width, brick.height);
+      ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+      ctx.fill();
+      ctx.closePath();
+    });
+  });
 };
 
 const drawBall = function () {

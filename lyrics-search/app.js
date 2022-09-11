@@ -90,7 +90,6 @@ const showSongsInfo = function (data) {
 
 const getMoreSongs = async function (url) {
   try {
-    console.log(url);
     const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
 
     if (!res.ok) throw new Error('Trouble getting more songs');
@@ -124,6 +123,13 @@ const handleNavigation = function (e) {
   }
 };
 
+const getLyrics = async function (artist, songTitle) {
+  try {
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const init = function () {
   search.focus();
 };
@@ -133,3 +139,13 @@ window.addEventListener('load', init);
 form.addEventListener('submit', handleSearch);
 
 more.addEventListener('click', handleNavigation);
+
+result.addEventListener('click', e => {
+  const clickedEl = e.target;
+  if (clickedEl.nodeName === 'BUTTON') {
+    const artist = clickedEl.getAttribute('data-artist');
+    const songTitle = clickedEl.getAttribute('data-song-title');
+
+    getLyrics(artist, songTitle);
+  }
+});

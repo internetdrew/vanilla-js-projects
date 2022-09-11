@@ -57,21 +57,31 @@ const brickInfo = {
   visible: true,
 };
 
-const createBricks = function () {
-  const bricksRows = new Array(game.brickRowCount).fill([]);
-  const brickColumns = new Array(game.brickColumnCount).fill({});
-
-  const bricks = bricksRows.map((row, index) => {
+const fillBrickRows = function (rows) {
+  return rows.map((row, index) => {
     const x = index * (brickInfo.width + brickInfo.padding) + brickInfo.offsetX;
     const y =
       index * (brickInfo.height + brickInfo.padding) + brickInfo.offsetY;
+
     return { x, y, ...brickInfo };
   });
-
-  return bricks;
 };
 
-const drawBricks = function () {};
+const createBricks = function () {
+  const brickRows = new Array(game.brickRowCount).fill({});
+  const brickColumns = new Array(game.brickColumnCount).fill([]);
+
+  const brickRowsInColumns = brickColumns.map((column, index) =>
+    fillBrickRows(brickRows)
+  );
+
+  return brickRowsInColumns;
+};
+
+const drawBricks = function () {
+  const bricks = createBricks();
+  console.log(bricks);
+};
 
 const drawBall = function () {
   ctx.beginPath();

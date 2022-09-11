@@ -22,6 +22,11 @@ closeBtn.addEventListener('click', () => rules.classList.remove('show'));
 // Increase score when bricks break
 // Lose - redraw bricks and reset score
 
+const game = {
+  score: 0,
+};
+
+// Ball props
 const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
@@ -32,8 +37,15 @@ const ball = {
 };
 
 // Paddle props
+const paddle = {
+  x: canvas.width / 2 - 40,
+  y: canvas.height - 20,
+  width: 80,
+  height: 10,
+  speed: 8,
+  dx: 0,
+};
 
-// Ball props
 const drawBall = function () {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
@@ -42,4 +54,23 @@ const drawBall = function () {
   ctx.closePath();
 };
 
-drawBall();
+const drawPaddle = function () {
+  ctx.beginPath();
+  ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+  ctx.fillStyle = '#0095dd';
+  ctx.fill();
+  ctx.closePath();
+};
+
+const drawScore = function () {
+  ctx.font = '2rem Arial';
+  ctx.fillText(`Score: ${game.score}`, canvas.width - 100, 30);
+};
+
+const draw = function () {
+  drawBall();
+  drawPaddle();
+  drawScore();
+};
+
+window.addEventListener('load', draw);

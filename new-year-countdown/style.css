@@ -39,3 +39,7 @@ body:after {
 body * {
   z-index: 1;
 }
+
+h1 {
+  font-size: 6rem;
+}

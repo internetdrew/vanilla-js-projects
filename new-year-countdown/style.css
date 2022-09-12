@@ -57,3 +57,26 @@ h1 {
   align-items: center;
   justify-content: center;
 }
+
+.time h2 {
+  margin: 0 0 0.5rem;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  .countdown {
+    gap: 1rem;
+  }
+
+  .time h2 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .time small {
+    font-size: 1rem;
+  }
+}

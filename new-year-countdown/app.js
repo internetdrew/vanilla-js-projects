@@ -5,11 +5,12 @@ const hoursEl = document.getElementById('hours');
 const minsEl = document.getElementById('mins');
 const secsEl = document.getElementById('secs');
 const countdownEl = document.getElementById('countdown');
+const yearEl = document.getElementById('year');
 
 const currentYear = new Date().getFullYear();
-
 const newYearTime = new Date(`January 01 ${currentYear + 1} 00:00:00`);
-console.log(newYearTime);
+
+yearEl.textContent = currentYear + 1;
 
 const updateCountdown = function () {
   const currentTime = new Date();
@@ -21,9 +22,9 @@ const updateCountdown = function () {
   const secs = Math.floor(diff / 1000) % 60;
 
   daysEl.textContent = days;
-  hoursEl.textContent = hours;
-  minsEl.textContent = mins;
-  secsEl.textContent = secs;
+  hoursEl.textContent = hours < 10 ? `0${hours}` : hours;
+  minsEl.textContent = mins < 10 ? `0${mins}` : mins;
+  secsEl.textContent = secs < 10 ? `0${secs}` : secs;
 };
 
 setInterval(updateCountdown, 1000);

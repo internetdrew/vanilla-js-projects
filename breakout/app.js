@@ -65,9 +65,10 @@ const getBricksData = function () {
     fillBrickRows(brickRows, index)
   );
 
-  game.bricks = brickRowsInColumns;
   return brickRowsInColumns;
 };
+
+const bricks = getBricksData();
 
 const drawBrick = function (brick) {
   ctx.beginPath();
@@ -78,7 +79,7 @@ const drawBrick = function (brick) {
 };
 
 const drawBricks = function () {
-  const bricks = getBricksData();
+  // const bricks = getBricksData();
   bricks.forEach(column => {
     column.forEach(brick => drawBrick(brick));
   });
@@ -139,7 +140,7 @@ const moveBall = function () {
     ball.dy = -ball.speed;
 
   // Brick detection
-  const bricks = getBricksData();
+  // const bricks = getBricksData();
   bricks.forEach(column => {
     column.forEach(brick => {
       if (!brick.visible) return;
@@ -152,7 +153,6 @@ const moveBall = function () {
       ) {
         ball.dy *= -1;
         brick.visible = false;
-        console.log(brick);
       }
     });
   });

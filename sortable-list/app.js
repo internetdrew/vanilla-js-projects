@@ -1,43 +1,61 @@
 'use strict';
 
 const draggableList = document.getElementById('draggable-list');
-const checkBtn = document.getElementById('check-order');
+const checkBtn = document.getElementById('check-btn');
 
-const richestPeople = [
-  'Jeff Bezos',
-  'Bill Gates',
-  'Warren Buffet',
-  'Bernard Arnault',
-  'Carlos Slim Helu',
-  'Amancio Ortega',
-  'Larry Ellison',
-  'Mark Zuckerberg',
-  'Michael Bloomberg',
-  'Larry Page',
-];
+const app = {
+  listItems: [],
+  dragStartIndex: 0,
+  richestPeople: [
+    'Jeff Bezos',
+    'Bill Gates',
+    'Warren Buffet',
+    'Bernard Arnault',
+    'Carlos Slim Helu',
+    'Amancio Ortega',
+    'Larry Ellison',
+    'Mark Zuckerberg',
+    'Michael Bloomberg',
+    'Larry Page',
+  ],
+};
 
-const listObjects = richestPeople.map((person, index) => ({
-  index,
-  person,
-}));
+const getListItems = function () {
+  const items = draggableList.querySelectorAll('li');
+  items.forEach(item => app.listItems.push(item));
+};
+
+const swapItems = function (fromIndex, toIndex) {
+  const itemOne = app.listItems[fromIndex].querySelector('.draggable');
+  const itemTwo = app.listItems[toIndex].querySelector('.draggable');
+
+  app.listItems[fromIndex].appendChild(itemTwo);
+  app.listItems[toIndex].appendChild(itemOne);
+};
 
 const dragStart = function () {
-  // console.log('start');
-};
-const dragOver = function () {
-  // console.log('over');
-};
-const dragDrop = function () {
-  // console.log('drop');
-};
-const dragEnter = function () {
-  // console.log('enter');
-};
-const dragLeave = function () {
-  // console.log('leave');
+  app.dragStartIndex = +this.closest('li').getAttribute('data-index');
 };
 
-const addEvenListeners = function () {
+const dragOver = function (e) {
+  e.preventDefault();
+};
+
+const dragDrop = function () {
+  const dragEndIndex = +this.getAttribute('data-index');
+  swapItems(app.dragStartIndex, dragEndIndex);
+
+  this.classList.remove('over');
+};
+
+const dragEnter = function () {
+  this.classList.add('over');
+};
+const dragLeave = function () {
+  this.classList.remove('over');
+};
+
+const addEventListeners = function () {
   const draggables = document.querySelectorAll('.draggable');
   const dragListItems = document.querySelectorAll('.draggable-list li');
 
@@ -54,7 +72,7 @@ const addEvenListeners = function () {
 };
 
 const createList = function () {
-  [...richestPeople]
+  [...app.richestPeople]
     .map(person => ({ value: person, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(person => person.value)
@@ -71,8 +89,23 @@ const createList = function () {
 
       draggableList.insertAdjacentHTML('beforeend', html);
     });
+  getListItems();
+  addEventListeners();
+};
 
-  addEvenListeners();
+const checkOrder = function () {
+  app.listItems.forEach((item, index) => {
+    console.log(item);
+    const personName = item.querySelector('.person-name').textContent;
+
+    if (personName !== app.richestPeople[index]) {
+      item.classList.add('wrong');
+    }
+    if (personName === app.richestPeople[index]) {
+      item.classList.remove('wrong');
+      item.classList.add('right');
+    }
+  });
 };
 
 const init = function () {
@@ -80,3 +113,4 @@ const init = function () {
 };
 
 window.addEventListener('load', init);
+checkBtn.addEventListener('click', checkOrder);

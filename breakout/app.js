@@ -65,6 +65,8 @@ const getBricksData = function () {
     fillBrickRows(brickRows, index)
   );
 
+  game.bricks = brickRowsInColumns;
+
   return brickRowsInColumns;
 };
 
@@ -122,14 +124,20 @@ const moveBall = function () {
   ball.y += ball.dy;
 
   // Wall detection(x)
-  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0)
     ball.dx *= -1; // When it hits, it gives it the opposite value
-  }
 
   // Wall detection y-axis
-  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0)
     ball.dy *= -1;
-  }
+
+  // Paddle detection
+  if (
+    ball.x - ball.size > paddle.x &&
+    ball.x + ball.size < paddle.x + paddle.width &&
+    ball.y + ball.size > paddle.y
+  )
+    ball.dy = -ball.speed;
 };
 
 const draw = function () {

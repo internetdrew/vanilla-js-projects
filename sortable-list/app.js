@@ -21,6 +21,38 @@ const listObjects = richestPeople.map((person, index) => ({
   person,
 }));
 
+const dragStart = function () {
+  // console.log('start');
+};
+const dragOver = function () {
+  // console.log('over');
+};
+const dragDrop = function () {
+  // console.log('drop');
+};
+const dragEnter = function () {
+  // console.log('enter');
+};
+const dragLeave = function () {
+  // console.log('leave');
+};
+
+const addEvenListeners = function () {
+  const draggables = document.querySelectorAll('.draggable');
+  const dragListItems = document.querySelectorAll('.draggable-list li');
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', dragStart);
+  });
+
+  dragListItems.forEach(item => {
+    item.addEventListener('dragover', dragOver);
+    item.addEventListener('drop', dragDrop);
+    item.addEventListener('dragenter', dragEnter);
+    item.addEventListener('dragleave', dragLeave);
+  });
+};
+
 const createList = function () {
   [...richestPeople]
     .map(person => ({ value: person, sort: Math.random() }))
@@ -39,6 +71,8 @@ const createList = function () {
 
       draggableList.insertAdjacentHTML('beforeend', html);
     });
+
+  addEvenListeners();
 };
 
 const init = function () {

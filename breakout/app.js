@@ -117,6 +117,21 @@ const movePaddle = function () {
   }
 };
 
+const moveBall = function () {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  // Wall detection(x)
+  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+    ball.dx *= -1; // When it hits, it gives it the opposite value
+  }
+
+  // Wall detection y-axis
+  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+    ball.dy *= -1;
+  }
+};
+
 const draw = function () {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -128,6 +143,7 @@ const draw = function () {
 
 const update = function () {
   movePaddle();
+  moveBall();
   draw();
   requestAnimationFrame(update);
 };

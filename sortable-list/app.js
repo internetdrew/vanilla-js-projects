@@ -20,7 +20,7 @@ const app = {
   ],
 };
 
-const getListItems = function () {
+const pushItemsToApp = function () {
   const items = draggableList.querySelectorAll('li');
   items.forEach(item => app.listItems.push(item));
 };
@@ -89,7 +89,7 @@ const createList = function () {
 
       draggableList.insertAdjacentHTML('beforeend', html);
     });
-  getListItems();
+  pushItemsToApp();
   addEventListeners();
 };
 

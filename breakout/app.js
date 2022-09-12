@@ -79,7 +79,6 @@ const drawBrick = function (brick) {
 };
 
 const drawBricks = function () {
-  // const bricks = getBricksData();
   bricks.forEach(column => {
     column.forEach(brick => drawBrick(brick));
   });
@@ -119,11 +118,25 @@ const movePaddle = function () {
   }
 };
 
+const showAllBricks = function () {
+  bricks.forEach(column => {
+    column.forEach(brick => (brick.visible = true));
+  });
+};
+
+const increaseScore = function () {
+  game.score++;
+
+  if (game.score % (game.brickRowCount * game.brickRowCount) === 0) {
+    showAllBricks();
+  }
+};
+
 const moveBall = function () {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
-  // Wall detection(x)
+  // Wall detection x-axis
   if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0)
     ball.dx *= -1; // When it hits, it gives it the opposite value
 
@@ -140,7 +153,6 @@ const moveBall = function () {
     ball.dy = -ball.speed;
 
   // Brick detection
-  // const bricks = getBricksData();
   bricks.forEach(column => {
     column.forEach(brick => {
       if (!brick.visible) return;
@@ -153,9 +165,17 @@ const moveBall = function () {
       ) {
         ball.dy *= -1;
         brick.visible = false;
+
+        increaseScore();
       }
     });
   });
+
+  // Hit bottom wall? Lose
+  if (ball.y + ball.size > canvas.height) {
+    showAllBricks();
+    game.score = 0;
+  }
 };
 
 const draw = function () {

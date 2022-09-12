@@ -66,7 +66,6 @@ const getBricksData = function () {
   );
 
   game.bricks = brickRowsInColumns;
-
   return brickRowsInColumns;
 };
 
@@ -138,6 +137,25 @@ const moveBall = function () {
     ball.y + ball.size > paddle.y
   )
     ball.dy = -ball.speed;
+
+  // Brick detection
+  const bricks = getBricksData();
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      if (!brick.visible) return;
+
+      if (
+        ball.x - ball.size > brick.x &&
+        ball.x + ball.size < brick.x + brick.width &&
+        ball.y + ball.size > brick.y &&
+        ball.y - ball.size < brick.y + brick.height
+      ) {
+        ball.dy *= -1;
+        brick.visible = false;
+        console.log(brick);
+      }
+    });
+  });
 };
 
 const draw = function () {

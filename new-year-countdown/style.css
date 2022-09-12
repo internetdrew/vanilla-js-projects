@@ -45,6 +45,16 @@ h1 {
   margin: -8rem 0 4rem;
 }
 
+.year {
+  font-size: 20rem;
+  z-index: -1;
+  opacity: 0.2;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .countdown {
   display: flex;
   transform: scale(2);
@@ -60,6 +70,20 @@ h1 {
 
 .time h2 {
   margin: 0 0 0.5rem;
+}
+
+.spinner {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 500px) {

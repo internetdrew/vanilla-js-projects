@@ -11,8 +11,42 @@
       src="https://kit.fontawesome.com/62494c37af.js"
       crossorigin="anonymous"
     ></script>
+    <script
+      defer
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      defer
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
     <script defer src="./app.js"></script>
-    <title>Document</title>
+    <title>New Year Countdown</title>
   </head>
-  <body></body>
+  <body>
+    <div id="year" class="class"></div>
+
+    <h1>New Year Countdown</h1>
+    <div id="countdown" class="countdown">
+      <div class="time">
+        <h2 id="days">00</h2>
+        <small>days</small>
+      </div>
+      <div class="time">
+        <h2 id="hours">00</h2>
+        <small>hours</small>
+      </div>
+      <div class="time">
+        <h2 id="mins">00</h2>
+        <small>mins</small>
+      </div>
+      <div class="time">
+        <h2 id="secs">00</h2>
+        <small>secs</small>
+      </div>
+    </div>
+
+    <!-- <ion-icon id="loading" name="reload-outline"></ion-icon> -->
+  </body>
 </html>

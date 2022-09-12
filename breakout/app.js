@@ -6,17 +6,6 @@ const rules = document.getElementById('rules');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-rulesBtn.addEventListener('click', () => rules.classList.add('show'));
-closeBtn.addEventListener('click', () => rules.classList.remove('show'));
-
-// Create canvas context
-// Create and draw ball
-// Create and draw paddle
-// Create bricks
-// Draw score
-// Add update() - Animate - requestAnimationFrame(cb)
-// Move paddle
-// Keyboard event handlers to move paddle
 // Move ball
 // Add wall boundaries
 // Increase score when bricks break
@@ -115,11 +104,57 @@ const drawScore = function () {
   ctx.fillText(`Score: ${game.score}`, canvas.width - 100, 30);
 };
 
+const movePaddle = function () {
+  paddle.x += paddle.dx;
+
+  // Wall detection
+  if (paddle.x + paddle.width > canvas.width) {
+    paddle.x = canvas.width - paddle.width;
+  }
+
+  if (paddle.x < 0) {
+    paddle.x = 0;
+  }
+};
+
 const draw = function () {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   drawBall();
   drawPaddle();
   drawScore();
   drawBricks();
 };
 
-window.addEventListener('load', draw);
+const update = function () {
+  movePaddle();
+  draw();
+  requestAnimationFrame(update);
+};
+
+const keyDown = function (e) {
+  if (e.key === 'ArrowRight' || e.key === 'Right') {
+    paddle.dx = paddle.speed;
+  }
+
+  if (e.key === 'ArrowLeft' || e.key === 'Left') {
+    paddle.dx = -paddle.speed;
+  }
+};
+
+const keyUp = function (e) {
+  if (
+    e.key === 'Right' ||
+    e.key === 'ArrowRight' ||
+    e.key === 'Left' ||
+    e.key === 'ArrowLeft'
+  ) {
+    paddle.dx = 0;
+  }
+};
+
+window.addEventListener('load', update);
+rulesBtn.addEventListener('click', () => rules.classList.add('show'));
+closeBtn.addEventListener('click', () => rules.classList.remove('show'));
+document.addEventListener('keydown', keyDown);
+document.addEventListener('keyup', keyUp);

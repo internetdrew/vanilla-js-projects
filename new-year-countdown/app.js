@@ -6,6 +6,7 @@ const minsEl = document.getElementById('mins');
 const secsEl = document.getElementById('secs');
 const countdownEl = document.getElementById('countdown');
 const yearEl = document.getElementById('year');
+const loading = document.getElementById('loading');
 
 const currentYear = new Date().getFullYear();
 const newYearTime = new Date(`January 01 ${currentYear + 1} 00:00:00`);
@@ -26,6 +27,11 @@ const updateCountdown = function () {
   minsEl.textContent = mins < 10 ? `0${mins}` : mins;
   secsEl.textContent = secs < 10 ? `0${secs}` : secs;
 };
+
+setTimeout(() => {
+  loading.remove();
+  countdownEl.style.display = 'flex';
+}, 1000);
 
 setInterval(updateCountdown, 1000);
 

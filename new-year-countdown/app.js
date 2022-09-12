@@ -31,7 +31,7 @@ const updateCountdown = function () {
 setTimeout(() => {
   loading.remove();
   countdownEl.style.display = 'flex';
-}, 1000);
+}, 800);
 
 setInterval(updateCountdown, 1000);
 

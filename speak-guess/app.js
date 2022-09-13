@@ -2,8 +2,12 @@
 
 const msgEl = document.getElementById('message');
 const box = document.querySelector('.box');
+const body = document.querySelector('body');
+const playAgain = document.getElementById('play-again');
 
-const clearChildEls = function () {};
+const clearChildElsFrom = function (parentEl) {
+  while (parentEl.firstChild) parentEl.removeChild(parentEl.firstChild);
+};
 
 const getRandomNumber = function () {
   return Math.floor(Math.random() * 100) + 1;
@@ -13,6 +17,8 @@ const randomNum = getRandomNumber();
 console.log(randomNum);
 
 const writeMsg = function (msg) {
+  clearChildElsFrom(msgEl);
+
   const markup = `
     <div>You said:</div>
       <span class="box">${msg}</span>
@@ -54,11 +60,12 @@ const checkNumber = function (msg) {
   if (num === randomNum) {
     const markup = `
    <h2>Congrats! You guessed the number! <br /><br />
-   It was ${randomNum}</h2>
-   <button class="play-again" id="play-again"></button>
+   It was ${randomNum}!</h2>
+   <button class="play-again" id="play-again">Play again</button>
    `;
 
-    document.body.insertAdjacentHTML('beforeend', markup);
+    clearChildElsFrom(body);
+    body.insertAdjacentHTML('beforeend', markup);
   }
 };
 
@@ -80,3 +87,8 @@ recognition.start();
 
 // Speak the result
 recognition.addEventListener('result', onSpeak);
+recognition.addEventListener('end', () => recognition.start());
+
+body.addEventListener('click', e => {
+  if (e.target.id === 'play-again') window.location.reload();
+});

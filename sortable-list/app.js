@@ -95,7 +95,6 @@ const createList = function () {
 
 const checkOrder = function () {
   app.listItems.forEach((item, index) => {
-    console.log(item);
     const personName = item.querySelector('.person-name').textContent;
 
     if (personName !== app.richestPeople[index]) {

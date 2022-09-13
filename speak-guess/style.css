@@ -31,11 +31,17 @@ p {
 }
 
 .play-again {
+  cursor: pointer;
   padding: 0.8rem 1.5rem;
   border: 0;
   background: #f4f4f4;
   border-radius: 0.5rem;
   margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+.play-again:active {
+  transform: scale(0.98);
 }
 
 .message {
